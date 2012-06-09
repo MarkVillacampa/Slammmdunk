@@ -9,4 +9,8 @@ Motion::Project::App.setup do |app|
 
   app.files = dirs.map{|d| Dir.glob(File.join(app.project_dir, "#{d}/**/*.rb")) }.flatten
   app.files_dependencies './app/app_delegate.rb' => './app/MCNavigationController.rb'
+
+  app.vendor_project( "vendor/PFGridView", :xcode,
+  :xcodeproj => "PFGridView.xcodeproj", :target => "PFGridView", :products => ["libPFGridView.a"],
+  :headers_dir => "PFGridView")
 end

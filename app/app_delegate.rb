@@ -2,7 +2,7 @@ class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds) 
 
-    @viewcontroller = MCTableViewController.new
+    @viewcontroller = PFGridViewDemoViewController.alloc.init # MCTableViewController.new
     @viewcontroller.title = "Featured"
 
     @navigationcontroller = MCNavigationController.alloc.initWithRootViewController @viewcontroller
