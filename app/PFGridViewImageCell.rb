@@ -1,12 +1,17 @@
 class PFGridViewImageCell < PFGridViewCell
 
+  attr_accessor :imageView
+
   def initWithReuseIdentifier(reuseIdentifier)
     super(reuseIdentifier)
     @stylesheet = :main
     layout (self) {
-      @imageView = subview(UIImageView, :frame => [[0,0],[80,80]],
+      @imageView = subview(UIImageView, :frame => [[0,0],[106,106]],
                                         :image => nil)
     }
+    self.selectedBackgroundColor = UIColor.blackColor
+    self.normalBackgroundColor = UIColor.blackColor
+
     self
   end
 

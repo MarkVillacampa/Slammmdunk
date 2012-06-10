@@ -26,9 +26,9 @@
     BOOL inHeader = point.y < headerHeight;
     if (inHeader) return;
     PFGridIndexPath *indexPath = [self indexPathForColAtPoint:point];
-    if ([selectedCellIndexPath isEqual:indexPath]) {
-        return;
-    }
+    // if ([selectedCellIndexPath isEqual:indexPath]) {
+    //     return;
+    // }
     if (delegate && [delegate respondsToSelector:@selector(gridView:willDeselectCellAtIndexPath:)]) {
         if (![delegate gridView:self willDeselectCellAtIndexPath:selectedCellIndexPath]) {
             return;

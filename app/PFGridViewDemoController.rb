@@ -5,8 +5,8 @@ class PFGridViewDemoViewController < UIViewController
     @demoGridView = PFGridView.alloc.initWithFrame(self.view.bounds)
     @demoGridView.dataSource = self
     @demoGridView.delegate = self
-    @demoGridView.cellHeight = 80
-    @demoGridView.headerHeight = 44
+    @demoGridView.cellHeight = 106
+    @demoGridView.headerHeight = 0
     self.view.addSubview @demoGridView
 
     @shots = []
@@ -58,11 +58,11 @@ class PFGridViewDemoViewController < UIViewController
   end
 
   def gridView(gridView, numberOfColsInSection: section)
-    4
+    3
   end
 
   def gridView(gridView, widthForColAtIndexPath:indexPath)
-    80
+    106
   end
 
   def backgroundColorForIndexPath(indexPath)
@@ -71,7 +71,9 @@ class PFGridViewDemoViewController < UIViewController
 
   def gridView(gridView, cellForColAtIndexPath: indexPath)
     unless shot = @shots[indexPath.row][indexPath.col]
-      return cell = gridView.dequeueReusableCellWithIdentifier("EmptyCell") || PFGridViewCell.alloc.initWithReuseIdentifier("EmptyCell")
+      cell = gridView.dequeueReusableCellWithIdentifier("Cell") || PFGridViewImageCell.alloc.initWithReuseIdentifier("Cell")
+      cell.imageView.image = nil
+      return cell
     end
     PFGridViewImageCell.cellForShot(shot, inGridView:gridView)
   end
@@ -85,8 +87,58 @@ class PFGridViewDemoViewController < UIViewController
     gridCell
   end
 
-  def gridView(gridView, didSelectCellAtIndexPath:index)
-    navigationController.pushViewController(MCShotViewController.alloc.initWithShot(@shots[index.row][index.col]), animated: true)
+  def viewForZoomingInScrollView(scrollView)
+    @imageView
+  end
+
+  def gridView(gridView, didSelectCellAtIndexPath:indexPath)
+    cellView = gridView.cellForColAtIndexPath(indexPath)
+    return unless cellView.imageView.image
+    frame = cellView.frame
+    frame.origin.y -= cellView.superview.contentOffset.y
+    @imageView = UIImageView.alloc.init
+    @imageView.image = cellView.imageView.image
+    cellView.imageView.hidden = true
+
+    scrollView = UIScrollView.alloc.initWithFrame(self.view.frame)
+    scrollView.delegate = self
+
+    scrollView.minimumZoomScale = 1.0
+    scrollView.maximumZoomScale = 6.0
+
+    view = UIView.alloc.initWithFrame(self.view.frame)
+    view.backgroundColor = UIColor.blackColor
+    view.alpha = 0
+
+    scrollView.addSubview(@imageView)
+    @imageView.frame = @imageView.superview.convertRect(frame, toView: nil)
+
+    @imageView.whenTapped do
+      scrollView.setZoomScale(1.0, animated: false)
+      UIView.animateWithDuration(0.5,
+        delay: 0, 
+        options: UIViewAnimationOptionCurveEaseOut,
+        animations: lambda {
+          view.alpha = 0
+          @imageView.frame = frame
+        },
+        completion: lambda { |finished|
+          view.removeFromSuperview
+          scrollView.removeFromSuperview
+          cellView.imageView.hidden = false
+      })
+    end
+
+    cellView.superview.superview.superview.superview.addSubview(view)
+    cellView.superview.superview.superview.superview.addSubview(scrollView)
+
+    UIView.animateWithDuration(0.5,
+      animations: lambda {
+        view.alpha = 1.0
+        @imageView.frame = [[(self.view.frame.size.width/2) - (300/2),
+          (self.view.frame.size.height/2) - (300/2)],[300,300]]
+      })
+    
   end
 
 end
