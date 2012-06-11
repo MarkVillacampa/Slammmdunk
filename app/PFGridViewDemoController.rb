@@ -126,29 +126,31 @@ def viewDidLoad
     @imageView.image = cellView.imageView.image
     cellView.imageView.hidden = true
 
-    scrollView = UIScrollView.alloc.initWithFrame(self.view.bounds)
+    scrollView = UIScrollView.alloc.initWithFrame([[0,0],[320,480]])
     scrollView.delegate = self
     # scrollView.contentInset = [30,30,0,0]
 
     scrollView.minimumZoomScale = 1.0
     scrollView.maximumZoomScale = 3.0
 
-    view = UIView.alloc.initWithFrame([[0,0],[320,416]])
+    view = UIView.alloc.initWithFrame([[0,0],[320,480]])
     view.backgroundColor = UIColor.blackColor
     view.alpha = 0
 
     scrollView.addSubview(@imageView)
-    @imageView.frame = @imageView.superview.convertRect(frame, toView: nil)
+    frame.origin.y += 64
+    @imageView.frame = frame #@imageView.superview.convertRect(frame, toView: nil)
 
     @imageView.whenTapped do
+      UIApplication.sharedApplication.setStatusBarHidden(false, animated:true)
       scrollView.setZoomScale(1.0, animated: true)
-      @imageView.frame.origin.y = (self.view.bounds.size.height - 320)/2
+      @imageView.frame.origin.y = (480 - 320)/2
       UIView.animateWithDuration(0.5,
         delay: 0, 
         options: UIViewAnimationOptionCurveEaseOut,
         animations: lambda {
           view.alpha = 0
-          frame.origin.y -= 48
+          frame.origin.y -= 80
           @imageView.frame = frame
         },
         completion: lambda { |finished|
@@ -158,9 +160,9 @@ def viewDidLoad
       })
     end
 
-    cellView.superview.superview.superview.superview.addSubview(view)
-    cellView.superview.superview.superview.superview.addSubview(scrollView)
-
+    cellView.superview.superview.superview.superview.superview.superview.superview.superview.addSubview(view)
+    cellView.superview.superview.superview.superview.superview.superview.superview.superview.addSubview(scrollView)
+    UIApplication.sharedApplication.setStatusBarHidden(true, animated:true)
     UIView.animateWithDuration(0.5,
       delay: 0,
       options: UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionNone,
@@ -168,7 +170,7 @@ def viewDidLoad
         view.alpha = 1.0
         # @imageView.frame = [[(self.view.bounds.size.width/2) - (300/2),
           # (self.view.bounds.size.height/2) - (300/2)],[300,300]]
-        @imageView.frame = [[0,(self.view.bounds.size.height - 320)/2],[320,320]]
+        @imageView.frame = [[0,(480 - 320)/2],[320,320]]
         # @imageView.frame = [[0,0],[320,320]]
       },
       completion: lambda { |finished|

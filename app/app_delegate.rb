@@ -8,7 +8,7 @@ class AppDelegate
     @navigationcontroller = MCNavigationController.alloc.initWithRootViewController @viewcontroller
 
     @window.rootViewController = @navigationcontroller
-    @window.backgroundColor = UIColor.whiteColor
+    @window.backgroundColor = UIColor.blackColor
     @window.makeKeyAndVisible
     true
   end

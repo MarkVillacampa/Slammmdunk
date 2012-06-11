@@ -8,6 +8,8 @@ Motion::Project::App.setup do |app|
   app.provisioning_profile = 'MarkDev.mobileprovision'
   app.sdk_version = "5.0"
 
+  app.info_plist['UIStatusBarStyle'] = "UIStatusBarStyleBlackOpaque"
+
   dirs = ['bubblewrap','sugarcube', 'teacup', 'styles', 'app']
 
   app.files = dirs.map{|d| Dir.glob(File.join(app.project_dir, "#{d}/**/*.rb")) }.flatten
