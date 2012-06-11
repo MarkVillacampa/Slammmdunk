@@ -5,6 +5,9 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Slammmdunk'
 
+  app.provisioning_profile = 'MarkDev.mobileprovision'
+  app.sdk_version = "5.0"
+
   dirs = ['bubblewrap','sugarcube', 'teacup', 'styles', 'app']
 
   app.files = dirs.map{|d| Dir.glob(File.join(app.project_dir, "#{d}/**/*.rb")) }.flatten

@@ -1,8 +1,9 @@
 class PFGridViewDemoViewController < UIViewController
 
-  def viewDidLoad
+def viewDidLoad
     super
-    @demoGridView = PFGridView.alloc.initWithFrame(self.view.bounds)
+    self.view.backgroundColor = UIColor.blackColor
+    @demoGridView = PFGridView.alloc.initWithFrame([[0,0],[320,416]])
     @demoGridView.dataSource = self
     @demoGridView.delegate = self
     @demoGridView.cellHeight = 106
@@ -91,6 +92,31 @@ class PFGridViewDemoViewController < UIViewController
     @imageView
   end
 
+  def scrollViewDidZoom(scrollView)
+    @imageView.frame.origin = [0,0]
+    innerFrame = @imageView.frame
+    scrollerBounds = scrollView.bounds
+
+    if ( innerFrame.size.width < scrollerBounds.size.width ) || ( innerFrame.size.height < scrollerBounds.size.height )
+        tempx = @imageView.center.x - ( scrollerBounds.size.width / 2 )
+        tempy = @imageView.center.y - ( scrollerBounds.size.height / 2 )
+        myScrollViewOffset = CGPointMake( tempx, tempy)
+
+        scrollView.contentOffset = myScrollViewOffset
+    end
+
+    anEdgeInset = UIEdgeInsetsMake(0, 0, 0, 0)
+    if scrollerBounds.size.width > innerFrame.size.width
+      anEdgeInset.left = (scrollerBounds.size.width - innerFrame.size.width) / 2
+      anEdgeInset.right = -anEdgeInset.left  # I don't know why this needs to be negative, but that's what works
+    end
+    if scrollerBounds.size.height > innerFrame.size.height
+        anEdgeInset.top = (scrollerBounds.size.height - innerFrame.size.height) / 2
+        anEdgeInset.bottom = -anEdgeInset.top;  # I don't know why this needs to be negative, but that's what works
+    end
+    scrollView.contentInset = anEdgeInset
+  end
+
   def gridView(gridView, didSelectCellAtIndexPath:indexPath)
     cellView = gridView.cellForColAtIndexPath(indexPath)
     return unless cellView.imageView.image
@@ -100,13 +126,14 @@ class PFGridViewDemoViewController < UIViewController
     @imageView.image = cellView.imageView.image
     cellView.imageView.hidden = true
 
-    scrollView = UIScrollView.alloc.initWithFrame(self.view.frame)
+    scrollView = UIScrollView.alloc.initWithFrame(self.view.bounds)
     scrollView.delegate = self
+    # scrollView.contentInset = [30,30,0,0]
 
     scrollView.minimumZoomScale = 1.0
-    scrollView.maximumZoomScale = 6.0
+    scrollView.maximumZoomScale = 3.0
 
-    view = UIView.alloc.initWithFrame(self.view.frame)
+    view = UIView.alloc.initWithFrame([[0,0],[320,416]])
     view.backgroundColor = UIColor.blackColor
     view.alpha = 0
 
@@ -114,12 +141,14 @@ class PFGridViewDemoViewController < UIViewController
     @imageView.frame = @imageView.superview.convertRect(frame, toView: nil)
 
     @imageView.whenTapped do
-      scrollView.setZoomScale(1.0, animated: false)
+      scrollView.setZoomScale(1.0, animated: true)
+      @imageView.frame.origin.y = (self.view.bounds.size.height - 320)/2
       UIView.animateWithDuration(0.5,
         delay: 0, 
         options: UIViewAnimationOptionCurveEaseOut,
         animations: lambda {
           view.alpha = 0
+          frame.origin.y -= 48
           @imageView.frame = frame
         },
         completion: lambda { |finished|
@@ -133,11 +162,19 @@ class PFGridViewDemoViewController < UIViewController
     cellView.superview.superview.superview.superview.addSubview(scrollView)
 
     UIView.animateWithDuration(0.5,
+      delay: 0,
+      options: UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionNone,
       animations: lambda {
         view.alpha = 1.0
-        @imageView.frame = [[(self.view.frame.size.width/2) - (300/2),
-          (self.view.frame.size.height/2) - (300/2)],[300,300]]
-      })
+        # @imageView.frame = [[(self.view.bounds.size.width/2) - (300/2),
+          # (self.view.bounds.size.height/2) - (300/2)],[300,300]]
+        @imageView.frame = [[0,(self.view.bounds.size.height - 320)/2],[320,320]]
+        # @imageView.frame = [[0,0],[320,320]]
+      },
+      completion: lambda { |finished|
+        @imageView.frame = [[0,0],[320,320]]
+        scrollViewDidZoom(scrollView)
+       })
     
   end
 
