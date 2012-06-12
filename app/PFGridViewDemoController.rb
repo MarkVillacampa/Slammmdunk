@@ -93,7 +93,6 @@ def viewDidLoad
   end
 
   def scrollViewDidZoom(scrollView)
-    @imageView.frame.origin = [0,0]
     innerFrame = @imageView.frame
     scrollerBounds = scrollView.bounds
 
@@ -120,16 +119,19 @@ def viewDidLoad
   def gridView(gridView, didSelectCellAtIndexPath:indexPath)
     cellView = gridView.cellForColAtIndexPath(indexPath)
     return unless cellView.imageView.image
+    
     frame = cellView.frame
+    # statusBar (20) + navigationBar (44) height
+    frame.origin.y += 64
+    # substract scrollView content offset
     frame.origin.y -= cellView.superview.contentOffset.y
+
     @imageView = UIImageView.alloc.init
     @imageView.image = cellView.imageView.image
     cellView.imageView.hidden = true
 
     scrollView = UIScrollView.alloc.initWithFrame([[0,0],[320,480]])
     scrollView.delegate = self
-    # scrollView.contentInset = [30,30,0,0]
-
     scrollView.minimumZoomScale = 1.0
     scrollView.maximumZoomScale = 3.0
 
@@ -137,10 +139,29 @@ def viewDidLoad
     view.backgroundColor = UIColor.blackColor
     view.alpha = 0
 
-    scrollView.addSubview(@imageView)
-    frame.origin.y += 64
-    @imageView.frame = frame #@imageView.superview.convertRect(frame, toView: nil)
+    @imageView.frame = frame
 
+    scrollView.addSubview(@imageView)
+
+    cellView.superview.superview.superview.superview.superview.superview.superview.superview.addSubview(view)
+    cellView.superview.superview.superview.superview.superview.superview.superview.superview.addSubview(scrollView)
+
+    UIApplication.sharedApplication.setStatusBarHidden(true, animated:true)
+    
+    UIView.animateWithDuration(0.5,
+      delay: 0,
+      options: UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionNone,
+      animations: lambda {
+        view.alpha = 1.0
+        # @imageView.frame = [[(self.view.bounds.size.width/2) - (300/2),
+          # (self.view.bounds.size.height/2) - (300/2)],[300,300]]
+        @imageView.frame = [[0,(480 - 320)/2],[320,320]]
+      },
+      completion: lambda { |finished|
+        @imageView.frame = [[0,0],[320,320]]
+        scrollViewDidZoom(scrollView)
+    })
+    
     @imageView.whenTapped do
       UIApplication.sharedApplication.setStatusBarHidden(false, animated:true)
       scrollView.setZoomScale(1.0, animated: true)
@@ -154,30 +175,11 @@ def viewDidLoad
           @imageView.frame = frame
         },
         completion: lambda { |finished|
+          @moreInfoView.removeFromSuperview
           view.removeFromSuperview
           scrollView.removeFromSuperview
           cellView.imageView.hidden = false
       })
     end
-
-    cellView.superview.superview.superview.superview.superview.superview.superview.superview.addSubview(view)
-    cellView.superview.superview.superview.superview.superview.superview.superview.superview.addSubview(scrollView)
-    UIApplication.sharedApplication.setStatusBarHidden(true, animated:true)
-    UIView.animateWithDuration(0.5,
-      delay: 0,
-      options: UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionNone,
-      animations: lambda {
-        view.alpha = 1.0
-        # @imageView.frame = [[(self.view.bounds.size.width/2) - (300/2),
-          # (self.view.bounds.size.height/2) - (300/2)],[300,300]]
-        @imageView.frame = [[0,(480 - 320)/2],[320,320]]
-        # @imageView.frame = [[0,0],[320,320]]
-      },
-      completion: lambda { |finished|
-        @imageView.frame = [[0,0],[320,320]]
-        scrollViewDidZoom(scrollView)
-       })
-    
   end
-
 end
