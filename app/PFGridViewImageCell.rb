@@ -1,6 +1,6 @@
 class PFGridViewImageCell < PFGridViewCell
 
-  attr_accessor :imageView
+  attr_accessor :imageView, :shot
 
   def initWithReuseIdentifier(reuseIdentifier)
     super(reuseIdentifier)
@@ -18,6 +18,7 @@ class PFGridViewImageCell < PFGridViewCell
   def self.cellForShot(shot, inGridView:gridView)
     cell = gridView.dequeueReusableCellWithIdentifier("Cell") || PFGridViewImageCell.alloc.initWithReuseIdentifier("Cell")
     cell.fillWithShot(shot, inGridView:gridView)
+    cell.shot = shot
     cell
   end
 
@@ -37,5 +38,5 @@ class PFGridViewImageCell < PFGridViewCell
     else
       @imageView.image = shot.image_small
     end
-  end
+  end 
 end
