@@ -15,11 +15,23 @@ class PFGridViewDemoViewController < UIViewController
     @demoGridView.headerHeight = 0
     self.view.addSubview @demoGridView
 
-    loadGridData("popular")
+    # Some trickery to make the grid load empty, and add PullToRefresh to the grid UIViewController
+    @shots = [[]]
+    @demoGridView.reloadData
+    @section = @demoGridView.section 0
+    @section.gridView.backgroundColor = UIColor.blackColor
+    @section.gridView.frame = [[0,0],[320,480]]
+
+    @type = "popular"
+    @section.gridView.addPullToRefreshWithActionHandler lambda {
+        loadGridData(@type)
+    }
+
+    loadGridData(@type)
   end
 
   def loadGridData(type)
-    @shots = []
+    @shots = [[]]
     # you cant pass a local variable into an async block!
     @type = type
     Dispatch::Queue.concurrent.async do 
@@ -42,6 +54,7 @@ class PFGridViewDemoViewController < UIViewController
         end
         @shots = new_shots.each_slice(4).to_a
         @demoGridView.reloadData
+        @section.gridView.pullToRefreshView.stopAnimating
       end
     end
   end

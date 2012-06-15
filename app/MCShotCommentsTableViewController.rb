@@ -30,28 +30,43 @@ class MCShotCommentsTableViewController < UITableViewController
     super
     tableView.dataSource = tableView.delegate = self
 
-    if @shot.comments.length == 0
-      Dispatch::Queue.concurrent.async do 
-        error_ptr = Pointer.new(:object)
-        data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{shot.data['id']}/comments"), options:NSDataReadingUncached, error:error_ptr)
-        unless data
-          presentError error_ptr[0]
-          return
-        end
-        json = NSJSONSerialization.JSONObjectWithData(data, options:0, error:error_ptr)
-        unless json
-          presentError error_ptr[0]
-          return
-        end
+    self.tableView.addPullToRefreshWithActionHandler lambda {
+        reloadComments
+    }
+    
+    # self.tableView.addInfiniteScrollingWithActionHandler lambda {
+    #     NSLog("load more data")
+    # }
+    
+    # self.tableView.pullToRefreshView.triggerRefresh
 
-        Dispatch::Queue.main.sync do
-          new_comments = []
-          json['comments'].each do |comment|
-            new_comments << Comment.new(comment)
-          end
-          @shot.comments = new_comments
-          tableView.reloadData 
+    if @shot.comments.length == 0
+      reloadComments
+    end
+  end
+
+  def reloadComments
+    Dispatch::Queue.concurrent.async do 
+      error_ptr = Pointer.new(:object)
+      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{shot.data['id']}/comments"), options:NSDataReadingUncached, error:error_ptr)
+      unless data
+        presentError error_ptr[0]
+        return
+      end
+      json = NSJSONSerialization.JSONObjectWithData(data, options:0, error:error_ptr)
+      unless json
+        presentError error_ptr[0]
+        return
+      end
+
+      Dispatch::Queue.main.sync do
+        new_comments = []
+        json['comments'].each do |comment|
+          new_comments << Comment.new(comment)
         end
+        @shot.comments = new_comments
+        tableView.reloadData
+        tableView.pullToRefreshView.stopAnimating
       end
     end
   end

@@ -1,0 +1,244 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4DBEF09C158B858000243A90 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBEF09B158B858000243A90 /* Foundation.framework */; };
+		4DBEF0AB158B859500243A90 /* SVPullToRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DBEF0A9158B859500243A90 /* SVPullToRefresh.h */; };
+		4DBEF0AC158B859500243A90 /* SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBEF0AA158B859500243A90 /* SVPullToRefresh.m */; };
+		4DBEF0B4158B85C400243A90 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBEF0B1158B85B300243A90 /* UIKit.framework */; };
+		4DBEF0B6158B85C400243A90 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBEF0AD158B85AA00243A90 /* CoreGraphics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4DBEF098158B858000243A90 /* libSVPullToRefresh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSVPullToRefresh.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DBEF09B158B858000243A90 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4DBEF09F158B858000243A90 /* SVPullToRefresh-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SVPullToRefresh-Prefix.pch"; sourceTree = "<group>"; };
+		4DBEF0A9158B859500243A90 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		4DBEF0AA158B859500243A90 /* SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPullToRefresh.m; sourceTree = "<group>"; };
+		4DBEF0AD158B85AA00243A90 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4DBEF0B1158B85B300243A90 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4DBEF095158B858000243A90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DBEF09C158B858000243A90 /* Foundation.framework in Frameworks */,
+				4DBEF0B4158B85C400243A90 /* UIKit.framework in Frameworks */,
+				4DBEF0B6158B85C400243A90 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4DBEF08D158B858000243A90 = {
+			isa = PBXGroup;
+			children = (
+				4DBEF09D158B858000243A90 /* SVPullToRefresh */,
+				4DBEF09A158B858000243A90 /* Frameworks */,
+				4DBEF099158B858000243A90 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4DBEF099158B858000243A90 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4DBEF098158B858000243A90 /* libSVPullToRefresh.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4DBEF09A158B858000243A90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DBEF0B1158B85B300243A90 /* UIKit.framework */,
+				4DBEF0AD158B85AA00243A90 /* CoreGraphics.framework */,
+				4DBEF09B158B858000243A90 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4DBEF09D158B858000243A90 /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				4DBEF0A9158B859500243A90 /* SVPullToRefresh.h */,
+				4DBEF0AA158B859500243A90 /* SVPullToRefresh.m */,
+				4DBEF09E158B858000243A90 /* Supporting Files */,
+			);
+			path = SVPullToRefresh;
+			sourceTree = "<group>";
+		};
+		4DBEF09E158B858000243A90 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4DBEF09F158B858000243A90 /* SVPullToRefresh-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4DBEF096158B858000243A90 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DBEF0AB158B859500243A90 /* SVPullToRefresh.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4DBEF097158B858000243A90 /* SVPullToRefresh */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DBEF0A5158B858000243A90 /* Build configuration list for PBXNativeTarget "SVPullToRefresh" */;
+			buildPhases = (
+				4DBEF094158B858000243A90 /* Sources */,
+				4DBEF095158B858000243A90 /* Frameworks */,
+				4DBEF096158B858000243A90 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SVPullToRefresh;
+			productName = SVPullToRefresh;
+			productReference = 4DBEF098158B858000243A90 /* libSVPullToRefresh.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4DBEF08F158B858000243A90 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 4DBEF092158B858000243A90 /* Build configuration list for PBXProject "SVPullToRefresh" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4DBEF08D158B858000243A90;
+			productRefGroup = 4DBEF099158B858000243A90 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DBEF097158B858000243A90 /* SVPullToRefresh */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4DBEF094158B858000243A90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DBEF0AC158B859500243A90 /* SVPullToRefresh.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4DBEF0A3158B858000243A90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4DBEF0A4158B858000243A90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4DBEF0A6158B858000243A90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SVPullToRefresh.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SVPullToRefresh/SVPullToRefresh-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4DBEF0A7158B858000243A90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SVPullToRefresh.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SVPullToRefresh/SVPullToRefresh-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4DBEF092158B858000243A90 /* Build configuration list for PBXProject "SVPullToRefresh" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DBEF0A3158B858000243A90 /* Debug */,
+				4DBEF0A4158B858000243A90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DBEF0A5158B858000243A90 /* Build configuration list for PBXNativeTarget "SVPullToRefresh" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DBEF0A6158B858000243A90 /* Debug */,
+				4DBEF0A7158B858000243A90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4DBEF08F158B858000243A90 /* Project object */;
+}

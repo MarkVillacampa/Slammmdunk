@@ -8,6 +8,8 @@ Motion::Project::App.setup do |app|
   app.provisioning_profile = 'MarkDev.mobileprovision'
   app.sdk_version = "5.0"
 
+  app.frameworks << "QuartzCore"
+
   app.icons = ["Icon@2x.png"]
 
   app.info_plist['UIStatusBarStyle'] = "UIStatusBarStyleBlackOpaque"
@@ -25,4 +27,8 @@ Motion::Project::App.setup do |app|
   app.vendor_project( "vendor/WEPopover-lib", :xcode,
   :xcodeproj => "WEPopover-lib.xcodeproj", :target => "WEPopover-lib", :products => ["libWEPopover-lib.a"],
   :headers_dir => "WEPopover-lib")
+
+  app.vendor_project( "vendor/SVPullToRefresh", :xcode,
+  :xcodeproj => "SVPullToRefresh.xcodeproj", :target => "SVPullToRefresh", :products => ["libSVPullToRefresh.a"],
+  :headers_dir => "SVPullToRefresh")
 end
