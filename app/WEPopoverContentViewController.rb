@@ -14,7 +14,7 @@ class WEPopoverContentViewController < UITableViewController
     self.tableView.rowHeight = 44.0
     self.tableView.bounces = false
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone
-    self.view.backgroundColor = UIColor.clearColor
+    self.tableView.backgroundColor = UIColor.clearColor
 
     @data = ['Popular', 'Debuts', 'Everyone']
   end
@@ -28,7 +28,9 @@ class WEPopoverContentViewController < UITableViewController
   end
 
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
-    cell = tableView.dequeueReusableCellWithIdentifier("Cell") || UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:"Cell")
+    cell = tableView.dequeueReusableCellWithIdentifier("Cell") || PopoverCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:"Cell")
+    cell.selectionStyle = UITableViewCellSelectionStyleNone
+    cell.backgroundColor = UIColor.clearColor
     cell.textLabel.text = @data[indexPath.row]
     cell.textLabel.textColor = UIColor.whiteColor
     cell
@@ -38,5 +40,9 @@ class WEPopoverContentViewController < UITableViewController
     self.gridView.loadGridData(@data[indexPath.row].downcase)
     self.popover.dismissPopoverAnimated(true)
     self.gridView.popoverController = nil
+  end
+
+  def tableView(tableView, willDisplayCell:cell, forRowAtIndexPath:indexPath)
+    cell.setBackgroundColor UIColor.clearColor
   end
 end
