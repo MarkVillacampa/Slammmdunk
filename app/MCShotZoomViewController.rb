@@ -73,8 +73,6 @@ class MCShotZoomViewController < UIViewController
       options: UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionNone,
       animations: lambda {
         blackView.alpha = 1.0
-        # @imageView.frame = [[(self.view.bounds.size.width/2) - (300/2),
-          # (self.view.bounds.size.height/2) - (300/2)],[300,300]]
         @imageView.frame = [[0,(480 - 240)/2],[320,240]]
       },
       completion: lambda { |finished|

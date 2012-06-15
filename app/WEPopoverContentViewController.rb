@@ -1,10 +1,12 @@
 class WEPopoverContentViewController < UITableViewController
 
-  def initWithStyle style
-    super
-    self.contentSizeForViewInPopover = CGSizeMake(285, 3 * 44)
-    @data = ['Popular', 'Debuts', 'Everyone']
-    self
+  attr_accessor :gridView, :popover
+
+  def init(style, gridView)
+    view = WEPopoverContentViewController.alloc.initWithStyle(style)
+    view.gridView = gridView
+    view.contentSizeForViewInPopover = CGSizeMake(285, 3 * 44)
+    view
   end
 
   def viewDidLoad
@@ -13,17 +15,15 @@ class WEPopoverContentViewController < UITableViewController
     self.tableView.bounces = false
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone
     self.view.backgroundColor = UIColor.clearColor
-    # // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    @data = ['Popular', 'Debuts', 'Everyone']
   end
 
   def numberOfSectionsInTableView tableView
-    # Return the number of sections.
     1
   end
 
   def tableView(tableView, numberOfRowsInSection: section)
-    # Return the number of rows in the section.
     3
   end
 
@@ -34,10 +34,9 @@ class WEPopoverContentViewController < UITableViewController
     cell
   end
 
-#pragma mark -
-#pragma mark Table view delegate
-
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
-
+    self.gridView.loadGridData(@data[indexPath.row].downcase)
+    self.popover.dismissPopoverAnimated(true)
+    self.gridView.popoverController = nil
   end
 end

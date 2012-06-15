@@ -4,8 +4,6 @@ class PFGridViewDemoViewController < UIViewController
 
   def viewDidLoad
     super
-
-    # @barButtonItem = navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Push", style:UIBarButtonItemStylePlain, target:self, action:"showPopover")
     @barButtonItem = navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithImage(UIImage.imageNamed("Toolbar-Icon.png"), style:UIBarButtonItemStylePlain, target:self, action:"showPopover")
     @barButtonItem.tintColor = "#ea4c89".uicolor
 
@@ -17,12 +15,16 @@ class PFGridViewDemoViewController < UIViewController
     @demoGridView.headerHeight = 0
     self.view.addSubview @demoGridView
 
-    @shots = []
-    @shots.clear
+    loadGridData("popular")
+  end
 
+  def loadGridData(type)
+    @shots = []
+    # you cant pass a local variable into an async block!
+    @type = type
     Dispatch::Queue.concurrent.async do 
       error_ptr = Pointer.new(:object)
-      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/popular?page=1&per_page=28"), options:NSDataReadingUncached, error:error_ptr)
+      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{@type}?page=1&per_page=28"), options:NSDataReadingUncached, error:error_ptr)
       unless data
         presentError error_ptr[0]
         return
@@ -39,24 +41,23 @@ class PFGridViewDemoViewController < UIViewController
           new_shots << Shot.new(shot)
         end
         @shots = new_shots.each_slice(4).to_a
-        @demoGridView.reloadData 
+        @demoGridView.reloadData
       end
     end
-
   end
 
   def showPopover
     if not self.popoverController
-      contentViewController = WEPopoverContentViewController.alloc.initWithStyle UITableViewStylePlain
+      contentViewController = WEPopoverContentViewController.alloc.init(UITableViewStylePlain, self)
 
       self.popoverController = WEPopoverController.alloc.initWithContentViewController(contentViewController)
+      contentViewController.popover = self.popoverController
       self.popoverController.delegate = self
       self.popoverController.passthroughViews = [self.navigationController.navigationBar]
       self.popoverController.containerViewProperties = self.improvedContainerViewProperties
       self.popoverController.presentPopoverFromBarButtonItem(@barButtonItem,
-                     permittedArrowDirections:(UIPopoverArrowDirectionUp),
-                             animated: true)
-
+        permittedArrowDirections:(UIPopoverArrowDirectionUp),
+        animated: true)
     else
       self.popoverController.dismissPopoverAnimated(true)
       self.popoverController = nil
