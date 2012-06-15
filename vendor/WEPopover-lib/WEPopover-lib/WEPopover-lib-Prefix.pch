@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'WEPopover-lib' target in the 'WEPopover-lib' project
+//
+
+#ifdef __OBJC__
+  #import <Foundation/Foundation.h>
+#endif

@@ -202,7 +202,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.0;
 			};
 			name = Debug;
 		};
@@ -215,7 +215,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.0;
 			};
 			name = Release;
 		};
@@ -240,6 +240,7 @@
 				GCC_PREFIX_HEADER = "PFGridView/PFGridView-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};

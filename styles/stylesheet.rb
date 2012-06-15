@@ -2,7 +2,7 @@ Teacup::Stylesheet.new :main do
 
   style UINavigationBar,
     barStyle: UIBarStyleBlack,
-    tintColor: "#ea4c89".uicolor,
+    tintColor: "#444444".uicolor,
     translucent: false,
     landscape: {
       tintColor: UIColor.blackColor

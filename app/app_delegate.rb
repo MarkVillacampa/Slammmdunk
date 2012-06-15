@@ -3,7 +3,7 @@ class AppDelegate
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds) 
 
     @viewcontroller = PFGridViewDemoViewController.alloc.init # MCTableViewController.new
-    @viewcontroller.title = "Featured"
+    @viewcontroller.title = "Popular"
 
     @navigationcontroller = MCNavigationController.alloc.initWithRootViewController @viewcontroller
 

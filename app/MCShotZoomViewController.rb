@@ -86,6 +86,7 @@ class MCShotZoomViewController < UIViewController
       UIApplication.sharedApplication.setStatusBarHidden(false, animated:true)
       scrollView.setZoomScale(1.0, animated: true)
       @imageView.frame.origin.y = (480 - 320)/2
+      commentsButton.removeFromSuperview
       UIView.animateWithDuration(0.5,
         delay: 0, 
         options: UIViewAnimationOptionCurveEaseOut,

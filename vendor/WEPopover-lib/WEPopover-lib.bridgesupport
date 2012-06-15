@@ -1,0 +1,293 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<class name='NSObject'>
+<method selector='displayAreaForPopover'>
+<retval declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+</method>
+<method selector='popoverControllerDidDismissPopover:'>
+<arg index='0' name='popoverController' declared_type='WEPopoverController*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='popoverControllerShouldDismissPopover:'>
+<arg index='0' name='popoverController' declared_type='WEPopoverController*' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='viewWasTouched:'>
+<arg index='0' name='view' declared_type='WETouchableView*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='UIBarButtonItem'>
+<method selector='frameInView:'>
+<arg index='0' name='v' declared_type='UIView*' type='@'/>
+<retval declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+</method>
+<method selector='superview'>
+<retval declared_type='UIView*' type='@'/>
+</method>
+</class>
+<class name='WEPopoverContainerView'>
+<method selector='arrowDirection'>
+<retval declared_type='UIPopoverArrowDirection' type='I'/>
+</method>
+<method selector='contentView'>
+<retval declared_type='UIView*' type='@'/>
+</method>
+<method selector='initWithSize:anchorRect:displayArea:permittedArrowDirections:properties:'>
+<arg index='0' name='theSize' declared_type='CGSize' type='{CGSize=ff}'/>
+<arg index='1' name='anchorRect' declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+<arg index='2' name='displayArea' declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+<arg index='3' name='permittedArrowDirections' declared_type='UIPopoverArrowDirection' type='I'/>
+<arg index='4' name='properties' declared_type='WEPopoverContainerViewProperties*' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='setContentView:'>
+<arg index='0' name='contentView' declared_type='UIView*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='updatePositionWithAnchorRect:displayArea:permittedArrowDirections:'>
+<arg index='0' name='anchorRect' declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+<arg index='1' name='displayArea' declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+<arg index='2' name='permittedArrowDirections' declared_type='UIPopoverArrowDirection' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='WEPopoverContainerViewProperties'>
+<method selector='arrowMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='bgImageName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='bottomBgMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='bottomContentMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='downArrowImageName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='leftArrowImageName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='leftBgCapSize'>
+<retval declared_type='NSInteger' type='i'/>
+</method>
+<method selector='leftBgMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='leftContentMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='rightArrowImageName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='rightBgMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='rightContentMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='setArrowMargin:'>
+<arg index='0' name='arrowMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setBgImageName:'>
+<arg index='0' name='bgImageName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setBottomBgMargin:'>
+<arg index='0' name='bottomBgMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setBottomContentMargin:'>
+<arg index='0' name='bottomContentMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDownArrowImageName:'>
+<arg index='0' name='downArrowImageName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftArrowImageName:'>
+<arg index='0' name='leftArrowImageName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftBgCapSize:'>
+<arg index='0' name='leftBgCapSize' declared_type='NSInteger' type='i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftBgMargin:'>
+<arg index='0' name='leftBgMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLeftContentMargin:'>
+<arg index='0' name='leftContentMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRightArrowImageName:'>
+<arg index='0' name='rightArrowImageName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRightBgMargin:'>
+<arg index='0' name='rightBgMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setRightContentMargin:'>
+<arg index='0' name='rightContentMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setTopBgCapSize:'>
+<arg index='0' name='topBgCapSize' declared_type='NSInteger' type='i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setTopBgMargin:'>
+<arg index='0' name='topBgMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setTopContentMargin:'>
+<arg index='0' name='topContentMargin' declared_type='CGFloat' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setUpArrowImageName:'>
+<arg index='0' name='upArrowImageName' declared_type='NSString*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='topBgCapSize'>
+<retval declared_type='NSInteger' type='i'/>
+</method>
+<method selector='topBgMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='topContentMargin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='upArrowImageName'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+</class>
+<class name='WEPopoverController'>
+<method selector='containerViewProperties'>
+<retval declared_type='WEPopoverContainerViewProperties*' type='@'/>
+</method>
+<method selector='contentViewController'>
+<retval declared_type='UIViewController*' type='@'/>
+</method>
+<method selector='context'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='delegate'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='dismissPopoverAnimated:'>
+<arg index='0' name='animated' declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='initWithContentViewController:'>
+<arg index='0' name='theContentViewController' declared_type='UIViewController*' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='isPopoverVisible'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='passthroughViews'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='popoverArrowDirection'>
+<retval declared_type='UIPopoverArrowDirection' type='I'/>
+</method>
+<method selector='popoverContentSize'>
+<retval declared_type='CGSize' type='{CGSize=ff}'/>
+</method>
+<method selector='presentPopoverFromBarButtonItem:permittedArrowDirections:animated:'>
+<arg index='0' name='item' declared_type='UIBarButtonItem*' type='@'/>
+<arg index='1' name='arrowDirections' declared_type='UIPopoverArrowDirection' type='I'/>
+<arg index='2' name='animated' declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='presentPopoverFromRect:inView:permittedArrowDirections:animated:'>
+<arg index='0' name='rect' declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+<arg index='1' name='view' declared_type='UIView*' type='@'/>
+<arg index='2' name='arrowDirections' declared_type='UIPopoverArrowDirection' type='I'/>
+<arg index='3' name='animated' declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='repositionPopoverFromRect:inView:permittedArrowDirections:'>
+<arg index='0' name='rect' declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+<arg index='1' name='view' declared_type='UIView*' type='@'/>
+<arg index='2' name='arrowDirections' declared_type='UIPopoverArrowDirection' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setContainerViewProperties:'>
+<arg index='0' name='containerViewProperties' declared_type='WEPopoverContainerViewProperties*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setContentViewController:'>
+<arg index='0' name='contentViewController' declared_type='UIViewController*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setContext:'>
+<arg index='0' name='context' declared_type='id' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDelegate:'>
+<arg index='0' name='delegate' declared_type='id' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setPassthroughViews:'>
+<arg index='0' name='passthroughViews' declared_type='NSArray*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setPopoverContentSize:'>
+<arg index='0' name='popoverContentSize' declared_type='CGSize' type='{CGSize=ff}'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='view'>
+<retval declared_type='UIView*' type='@'/>
+</method>
+</class>
+<class name='WETouchableView'>
+<method selector='delegate'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='passthroughViews'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='setDelegate:'>
+<arg index='0' name='delegate' declared_type='id' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setPassthroughViews:'>
+<arg index='0' name='passthroughViews' declared_type='NSArray*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setTouchForwardingDisabled:'>
+<arg index='0' name='touchForwardingDisabled' declared_type='BOOL' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='touchForwardingDisabled'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</class>
+<informal_protocol name='WEPopoverControllerDelegate'>
+<method selector='popoverControllerDidDismissPopover:' type='v12@0:4@8'>
+<arg index='0' name='popoverController' declared_type='WEPopoverController*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='popoverControllerShouldDismissPopover:' type='B12@0:4@8'>
+<arg index='0' name='popoverController' declared_type='WEPopoverController*' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</informal_protocol>
+<informal_protocol name='WEPopoverParentView'>
+<method selector='displayAreaForPopover' type='{CGRect={CGPoint=ff}{CGSize=ff}}8@0:4'>
+<retval declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+</method>
+</informal_protocol>
+<informal_protocol name='WETouchableViewDelegate'>
+<method selector='viewWasTouched:' type='v12@0:4@8'>
+<arg index='0' name='view' declared_type='WETouchableView*' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
+</signatures>
