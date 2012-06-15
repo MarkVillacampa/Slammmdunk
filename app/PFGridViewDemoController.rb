@@ -1,8 +1,8 @@
 class PFGridViewDemoViewController < UIViewController
 
-attr_accessor :popoverController
+  attr_accessor :popoverController
 
-def viewDidLoad
+  def viewDidLoad
     super
 
     # @barButtonItem = navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Push", style:UIBarButtonItemStylePlain, target:self, action:"showPopover")

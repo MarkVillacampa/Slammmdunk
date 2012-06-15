@@ -6,7 +6,7 @@ class MCShotCommentsTableViewController < UITableViewController
 
   def self.initWithShot(shot)
     tableViewController = MCShotCommentsTableViewController.alloc.init
-    tableViewController.fillWithComment shot
+    tableViewController.shot = shot
     tableViewController
   end
 
@@ -29,42 +29,39 @@ class MCShotCommentsTableViewController < UITableViewController
   def viewDidLoad
     super
     tableView.dataSource = tableView.delegate = self
-  end
 
-  def fillWithComment(shot)
-    @comments = []
-    @comments.clear
-
-    Dispatch::Queue.concurrent.async do 
-      error_ptr = Pointer.new(:object)
-      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{shot.data['id']}/comments"), options:NSDataReadingUncached, error:error_ptr)
-      unless data
-        presentError error_ptr[0]
-        return
-      end
-      json = NSJSONSerialization.JSONObjectWithData(data, options:0, error:error_ptr)
-      unless json
-        presentError error_ptr[0]
-        return
-      end
-
-      Dispatch::Queue.main.sync do
-        new_comments = []
-        json['comments'].each do |comment|
-          new_comments << Comment.new(comment)
+    if @shot.comments.length == 0
+      Dispatch::Queue.concurrent.async do 
+        error_ptr = Pointer.new(:object)
+        data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{shot.data['id']}/comments"), options:NSDataReadingUncached, error:error_ptr)
+        unless data
+          presentError error_ptr[0]
+          return
         end
-        @comments = new_comments
-        tableView.reloadData 
+        json = NSJSONSerialization.JSONObjectWithData(data, options:0, error:error_ptr)
+        unless json
+          presentError error_ptr[0]
+          return
+        end
+
+        Dispatch::Queue.main.sync do
+          new_comments = []
+          json['comments'].each do |comment|
+            new_comments << Comment.new(comment)
+          end
+          @shot.comments = new_comments
+          tableView.reloadData 
+        end
       end
     end
   end
-  
+
   def tableView(tableView, numberOfRowsInSection:number)
-    @comments.length
+    @shot.comments.length
   end
 
   def tableView(tableView, cellForRowAtIndexPath:index)
-    comment = @comments[index.row]
+    comment = @shot.comments[index.row]
     MCShotCommentsTableViewCell.cellForComment(comment, inTableView:tableView)
   end
 
@@ -73,14 +70,14 @@ class MCShotCommentsTableViewController < UITableViewController
   end
 
   def reloadRowForComment(comment)
-    row = @comments.index(comment)
+    row = @shot.comments.index(comment)
     if row
       view.reloadRowsAtIndexPaths([NSIndexPath.indexPathForRow(row, inSection:0)], withRowAnimation:false)
     end
   end
 
   def tableView(tableView, heightForRowAtIndexPath: indexPath)
-    MCShotCommentsTableViewCell.heightForCell(@comments[indexPath.row], tableView.frame.size.width)
+    MCShotCommentsTableViewCell.heightForCell(@shot.comments[indexPath.row], tableView.frame.size.width)
   end
 
   def shouldAutorotateToInterfaceOrientation(orientation)
