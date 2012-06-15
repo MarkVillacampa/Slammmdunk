@@ -2,8 +2,8 @@ Teacup::Stylesheet.new :main do
 
   style UINavigationBar,
     barStyle: UIBarStyleBlack,
-    tintColor: "#ea4c89".uicolor,
-    translucent: true,
+    tintColor: "#444444".uicolor,
+    translucent: false,
     landscape: {
       tintColor: UIColor.blackColor
     }
@@ -13,21 +13,29 @@ Teacup::Stylesheet.new :main do
     separatorColor: "#eaeaea".uicolor,
     landscape: true
 
-  style UITableViewCell,
-    accessoryType: UITableViewCellAccessoryDisclosureIndicator
-
   style :cell_label,
     textColor: "#595857".uicolor,
-    landscape: true
+    landscape: true,
+    backgroundColor: UIColor.clearColor
 
-  style :image_view,
-    frame: [[5, 5], [49, 49]],
+  style(:image_view,
+    frame: [[6, 6], [49 , 49]],
     landscape: true,
     layer: {
       masksToBounds: true,
       cornerRadius: 10.0,
       borderColor: "#595857".uicolor.CGColor,
       borderWidth: 1.0
-    }
+    })
+
+  style :comment_label,
+    numberOfLines: 0,
+    # font: UIFont.systemFontOfSize(14),
+    backgroundColor: UIColor.clearColor
+
+  style :time_label,
+    # font: UIFont.systemFontOfSize(10),
+    backgroundColor: UIColor.clearColor,
+    textColor: UIColor.lightGrayColor
 
 end

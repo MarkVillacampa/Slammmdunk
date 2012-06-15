@@ -1,0 +1,437 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<enum name='PFGridViewScrollPositionBottom' value='4'/>
+<enum name='PFGridViewScrollPositionCenter' value='3'/>
+<enum name='PFGridViewScrollPositionLeft' value='2'/>
+<enum name='PFGridViewScrollPositionNone' value='0'/>
+<enum name='PFGridViewScrollPositionRight' value='5'/>
+<enum name='PFGridViewScrollPositionTop' value='1'/>
+<enum name='PFGridViewSelectModeCell' value='1'/>
+<enum name='PFGridViewSelectModeNone' value='0'/>
+<enum name='PFGridViewSelectModeRow' value='2'/>
+<class name='NSObject'>
+<method selector='gridView:cellForColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method selector='gridView:didDeselectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='gridView:didSelectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='gridView:headerForColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method selector='gridView:numberOfColsInSection:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='section' declared_type='NSUInteger' type='I' index='1'/>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='gridView:scrollToOffsetY:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='offsetY' declared_type='CGFloat' type='f' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='gridView:widthForColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='gridView:willDeselectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='gridView:willDisplayCell:forColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='cell' declared_type='PFGridViewCell*' type='@' index='1'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='2'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='gridView:willSelectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='numberOfRowsInGridView:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='numberOfSectionsInGridView:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='widthForSection:'>
+<arg name='section' declared_type='NSUInteger' type='I' index='0'/>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+</class>
+<class name='PFGridIndexPath'>
+<method selector='col'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='indexPathForCol:inRow:inSection:' class_method='true'>
+<arg name='col' declared_type='NSUInteger' type='I' index='0'/>
+<arg name='row' declared_type='NSUInteger' type='I' index='1'/>
+<arg name='section' declared_type='NSUInteger' type='I' index='2'/>
+<retval declared_type='PFGridIndexPath*' type='@'/>
+</method>
+<method selector='initForCol:inRow:inSection:'>
+<arg name='pathCol' declared_type='NSUInteger' type='I' index='0'/>
+<arg name='pathRow' declared_type='NSUInteger' type='I' index='1'/>
+<arg name='pathSection' declared_type='NSUInteger' type='I' index='2'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='row'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='section'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+</class>
+<class name='PFGridView'>
+<method selector='cellForColAtIndexPath:'>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='0'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method selector='cellHeight'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='dequeueReusableCellWithIdentifier:'>
+<arg name='identifier' declared_type='NSString*' type='@' index='0'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method selector='directionalLockEnabled'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='enqueueReusableCell:'>
+<arg name='cell' declared_type='PFGridViewCell*' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='headerForColAtIndexPath:'>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='0'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method selector='headerHeight'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='id'>
+<retval declared_type='int' type='i'/>
+</method>
+<method selector='indexPathForColAtPoint:'>
+<arg name='point' declared_type='CGPoint' type='{CGPoint=ff}' index='0'/>
+<retval declared_type='PFGridIndexPath*' type='@'/>
+</method>
+<method selector='indexPathForSelectedCell'>
+<retval declared_type='PFGridIndexPath*' type='@'/>
+</method>
+<method selector='isIndexPathSelected:'>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='0'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='reloadData'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='reloadSections'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='resizeSections'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='scrollFromSection:offsetY:'>
+<arg name='section' declared_type='PFGridViewSection*' type='@' index='0'/>
+<arg name='y' declared_type='CGFloat' type='f' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='scrollToCellAtIndexPath:animated:scrollPosition:'>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='0'/>
+<arg name='animated' declared_type='BOOL' type='B' index='1'/>
+<arg name='scrollPosition' declared_type='PFGridViewScrollPosition' type='i' index='2'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='section:'>
+<arg name='sectionIndex' declared_type='NSUInteger' type='I' index='0'/>
+<retval declared_type='PFGridViewSection*' type='@'/>
+</method>
+<method selector='sectionAtPoint:'>
+<arg name='point' declared_type='CGPoint' type='{CGPoint=ff}' index='0'/>
+<retval declared_type='PFGridViewSection*' type='@'/>
+</method>
+<method selector='selectAnamationDuration'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='selectAnimated'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='selectCellAtIndexPath:animated:scrollPosition:'>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='0'/>
+<arg name='animated' declared_type='BOOL' type='B' index='1'/>
+<arg name='scrollPosition' declared_type='PFGridViewScrollPosition' type='i' index='2'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='selectMode'>
+<retval declared_type='PFGridViewSelectMode' type='i'/>
+</method>
+<method selector='setCellHeight:'>
+<arg name='cellHeight' declared_type='CGFloat' type='f' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDirectionalLockEnabled:'>
+<arg name='directionalLockEnabled' declared_type='BOOL' type='B' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setHeaderHeight:'>
+<arg name='headerHeight' declared_type='CGFloat' type='f' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setId:'>
+<arg name='id' declared_type='int' type='i' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSelectAnamationDuration:'>
+<arg name='selectAnamationDuration' declared_type='CGFloat' type='f' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSelectAnimated:'>
+<arg name='selectAnimated' declared_type='BOOL' type='B' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSelectMode:'>
+<arg name='selectMode' declared_type='PFGridViewSelectMode' type='i' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSnapToGrid:'>
+<arg name='snapToGrid' declared_type='BOOL' type='B' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSnapToGridAnamationDuration:'>
+<arg name='snapToGridAnamationDuration' declared_type='CGFloat' type='f' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setupGestures'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='snapToGrid'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='snapToGridAnamationDuration'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='willDisplayCell:forRowAtIndexPath:'>
+<arg name='cell' declared_type='PFGridViewCell*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='PFGridViewCell'>
+<method selector='indexPath'>
+<retval declared_type='PFGridIndexPath*' type='@'/>
+</method>
+<method selector='initWithReuseIdentifier:'>
+<arg name='identifier' declared_type='NSString*' type='@' index='0'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='normalBackgroundColor'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='reuseIdentifier'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='selected'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='selectedBackgroundColor'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='setIndexPath:'>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setNormalBackgroundColor:'>
+<arg name='normalBackgroundColor' declared_type='int*' type='^i' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setReuseIdentifier:'>
+<arg name='reuseIdentifier' declared_type='NSString*' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSelected:'>
+<arg name='selected' declared_type='BOOL' type='B' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSelected:animated:'>
+<arg name='newSelected' declared_type='BOOL' type='B' index='0'/>
+<arg name='animated' declared_type='BOOL' type='B' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSelectedBackgroundColor:'>
+<arg name='selectedBackgroundColor' declared_type='int*' type='^i' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='PFGridViewLabelCell'>
+<method selector='margin'>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method selector='setMargin:'>
+<arg name='margin' declared_type='CGFloat' type='f' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='textLabel'>
+<retval declared_type='int*' type='^i'/>
+</method>
+</class>
+<class name='PFGridViewSection'>
+<method selector='cellInView:forColAtIndexPath:'>
+<arg name='scrollView' declared_type='id' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method selector='clearScrollView:'>
+<arg name='scrollView' declared_type='id' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='frameForCol:inRow:'>
+<arg name='col' declared_type='NSUInteger' type='I' index='0'/>
+<arg name='row' declared_type='NSUInteger' type='I' index='1'/>
+<retval declared_type='CGRect' type='{CGRect={CGPoint=ff}{CGSize=ff}}'/>
+</method>
+<method selector='gridView'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='headerView'>
+<retval declared_type='int*' type='^i'/>
+</method>
+<method selector='hideUnvisibleCells:'>
+<arg name='scrollView' declared_type='id' type='@' index='0'/>
+<retval declared_type='NSSet*' type='@'/>
+</method>
+<method selector='indexPathForCol:inRow:'>
+<arg name='col' declared_type='NSUInteger' type='I' index='0'/>
+<arg name='row' declared_type='NSUInteger' type='I' index='1'/>
+<retval declared_type='PFGridIndexPath*' type='@'/>
+</method>
+<method selector='indexPathForColAtPoint:'>
+<arg name='point' declared_type='CGPoint' type='{CGPoint=ff}' index='0'/>
+<retval declared_type='PFGridIndexPath*' type='@'/>
+</method>
+<method selector='owner'>
+<retval declared_type='PFGridView*' type='@'/>
+</method>
+<method selector='refreshScrollView:'>
+<arg name='scrollView' declared_type='id' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='reloadData'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='scrollToCol:scrollPosition:'>
+<arg name='col' declared_type='NSUInteger' type='I' index='0'/>
+<arg name='scrollPosition' declared_type='PFGridViewScrollPosition' type='i' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='scrollToOffsetY:'>
+<arg name='y' declared_type='CGFloat' type='f' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='sectionIndex'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='setOwner:'>
+<arg name='owner' declared_type='PFGridView*' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSectionIndex:'>
+<arg name='sectionIndex' declared_type='NSUInteger' type='I' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setupScrollView:'>
+<arg name='scrollView' declared_type='id' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='showVisibleCells:visibleIndexPathes:'>
+<arg name='scrollView' declared_type='id' type='@' index='0'/>
+<arg name='visibleIndexPathes' declared_type='NSSet*' type='@' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='snapToGrid:'>
+<arg name='scrollView' declared_type='id' type='@' index='0'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<informal_protocol name='PFGridViewDataSource'>
+<method type='@16@0:4@8@12' selector='gridView:cellForColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method type='@16@0:4@8@12' selector='gridView:headerForColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='PFGridViewCell*' type='@'/>
+</method>
+<method type='I16@0:4@8I12' selector='gridView:numberOfColsInSection:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='section' declared_type='NSUInteger' type='I' index='1'/>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method type='f16@0:4@8@12' selector='gridView:widthForColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+<method type='I12@0:4@8' selector='numberOfRowsInGridView:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method type='I12@0:4@8' selector='numberOfSectionsInGridView:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method type='f12@0:4I8' selector='widthForSection:'>
+<arg name='section' declared_type='NSUInteger' type='I' index='0'/>
+<retval declared_type='CGFloat' type='f'/>
+</method>
+</informal_protocol>
+<informal_protocol name='PFGridViewDelegate'>
+<method type='v16@0:4@8@12' selector='gridView:didDeselectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method type='v16@0:4@8@12' selector='gridView:didSelectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method type='v16@0:4@8f12' selector='gridView:scrollToOffsetY:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='offsetY' declared_type='CGFloat' type='f' index='1'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method type='B16@0:4@8@12' selector='gridView:willDeselectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method type='v20@0:4@8@12@16' selector='gridView:willDisplayCell:forColAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='cell' declared_type='PFGridViewCell*' type='@' index='1'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='2'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method type='B16@0:4@8@12' selector='gridView:willSelectCellAtIndexPath:'>
+<arg name='gridView' declared_type='PFGridView*' type='@' index='0'/>
+<arg name='indexPath' declared_type='PFGridIndexPath*' type='@' index='1'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</informal_protocol>
+</signatures>
