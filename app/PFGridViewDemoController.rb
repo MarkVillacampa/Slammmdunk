@@ -13,7 +13,7 @@ def viewDidLoad
     @demoGridView = PFGridView.alloc.initWithFrame([[0,0],[320,416]])
     @demoGridView.dataSource = self
     @demoGridView.delegate = self
-    @demoGridView.cellHeight = 106
+    @demoGridView.cellHeight = 79.5
     @demoGridView.headerHeight = 0
     self.view.addSubview @demoGridView
 

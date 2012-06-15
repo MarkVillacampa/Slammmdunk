@@ -75,24 +75,24 @@ class MCShotZoomViewController < UIViewController
         blackView.alpha = 1.0
         # @imageView.frame = [[(self.view.bounds.size.width/2) - (300/2),
           # (self.view.bounds.size.height/2) - (300/2)],[300,300]]
-        @imageView.frame = [[0,(480 - 320)/2],[320,320]]
+        @imageView.frame = [[0,(480 - 240)/2],[320,240]]
       },
       completion: lambda { |finished|
-        @imageView.frame = [[0,0],[320,320]]
+        @imageView.frame = [[0,0],[320,240]]
         scrollViewDidZoom(scrollView)
       })
     
     @imageView.whenTapped do
       UIApplication.sharedApplication.setStatusBarHidden(false, animated:true)
       scrollView.setZoomScale(1.0, animated: true)
-      @imageView.frame.origin.y = (480 - 320)/2
+      @imageView.frame.origin.y = (480 - 240)/2
       commentsButton.removeFromSuperview
       UIView.animateWithDuration(0.5,
         delay: 0, 
         options: UIViewAnimationOptionCurveEaseOut,
         animations: lambda {
           blackView.alpha = 0
-          frame.origin.y -= 80
+          frame.origin.y -= 120
           @imageView.frame = frame
         },
         completion: lambda { |finished|
