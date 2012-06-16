@@ -40,6 +40,20 @@ class MCShotZoomViewController < UIViewController
     @imageView.image = cellView.imageView.image
     cellView.imageView.hidden = true
 
+    unless cellView.shot.image_big
+      Dispatch::Queue.concurrent.async do
+        image_data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString(cellView.shot.data['image_url']))
+        if image_data
+          cellView.shot.image_big = UIImage.alloc.initWithData(image_data)
+          Dispatch::Queue.main.sync do
+            @imageView.image = cellView.shot.image_big
+          end
+        end
+      end
+    else
+      @imageView.image = cellView.shot.image_big
+    end
+
     scrollView = UIScrollView.alloc.initWithFrame([[0,0],[320,480]])
     scrollView.delegate = self
     scrollView.minimumZoomScale = 1.0
