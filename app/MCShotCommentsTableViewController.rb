@@ -19,9 +19,14 @@ class MCShotCommentsTableViewController < UITableViewController
     commentsButton = UIImageView.alloc.initWithImage(UIImage.imageNamed("info_button.png"))
     commentsButton.frame = [[320 - 26 -10,10],[26,26]]
 
-    commentsButton.whenTapped do
+    commentsButton.setUserInteractionEnabled true
+
+    singleTapGestureRecognizer = UITapGestureRecognizer.alloc.initWithTarget( @block_three = Proc.new {
       dismissViewControllerAnimated(true, completion: lambda {})
-    end
+      }, action: 'call')
+    
+    singleTapGestureRecognizer.numberOfTapsRequired = 1
+    commentsButton.addGestureRecognizer(singleTapGestureRecognizer)
 
     self.tableView.tableHeaderView.addSubview(commentsButton)
   end

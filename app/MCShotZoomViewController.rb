@@ -66,11 +66,16 @@ class MCShotZoomViewController < UIViewController
     commentsButton = UIImageView.alloc.initWithImage(UIImage.imageNamed("info_button.png"))
     commentsButton.frame = [[320 - 26 -10,10],[26,26]]
 
-    commentsButton.whenTapped do
+    commentsButton.setUserInteractionEnabled true
+
+    singleTapGestureRecognizer = UITapGestureRecognizer.alloc.initWithTarget( @block_three = Proc.new {
       commentsViewController = MCShotCommentsTableViewController.initWithShot(cellView.shot)
       commentsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal
       self.presentViewController(commentsViewController, animated: true, completion: lambda {})
-    end
+      }, action: 'call')
+    
+    singleTapGestureRecognizer.numberOfTapsRequired = 1
+    commentsButton.addGestureRecognizer(singleTapGestureRecognizer)
 
     @imageView.frame = frame
 
@@ -93,8 +98,21 @@ class MCShotZoomViewController < UIViewController
         @imageView.frame = [[0,0],[320,240]]
         scrollViewDidZoom(scrollView)
       })
-    
-    @imageView.whenTapped do
+
+    @imageView.setUserInteractionEnabled true
+
+    doubleTapGestureRecognizer = UITapGestureRecognizer.alloc.initWithTarget( @block_one = Proc.new {
+      if scrollView.zoomScale < scrollView.maximumZoomScale-1.0
+        scrollView.setZoomScale(scrollView.zoomScale + 1.0, animated: true)
+      else 
+        scrollView.setZoomScale(1.0, animated: true)
+      end
+      }, action: 'call')
+    doubleTapGestureRecognizer.numberOfTapsRequired = 2
+
+    @imageView.addGestureRecognizer doubleTapGestureRecognizer
+
+    singleTapGestureRecognizer = UITapGestureRecognizer.alloc.initWithTarget( @block_two = Proc.new {
       UIApplication.sharedApplication.setStatusBarHidden(false, animated:true)
       scrollView.setZoomScale(1.0, animated: true)
       @imageView.frame.origin.y = (480 - 240)/2
@@ -110,10 +128,13 @@ class MCShotZoomViewController < UIViewController
         completion: lambda { |finished|
           self.view.removeFromSuperview
           cellView.imageView.hidden = false
-      })
-    end
+        })
+      }, action: 'call')
+    
+    singleTapGestureRecognizer.numberOfTapsRequired = 1
+    singleTapGestureRecognizer.requireGestureRecognizerToFail doubleTapGestureRecognizer
+    @imageView.addGestureRecognizer(singleTapGestureRecognizer)
 
     self
   end
-
 end
