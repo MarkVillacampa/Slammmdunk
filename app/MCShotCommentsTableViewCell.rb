@@ -13,12 +13,18 @@ class MCShotCommentsTableViewCell < UITableViewCell
   def self.cellForComment(comment, inTableView:tableView)
     cell = tableView.dequeueReusableCellWithIdentifier("Cell") || MCShotCommentsTableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:"Cell")
     cell.fillWithComment(comment, inTableView:tableView)
+    cell.selectionStyle = UITableViewCellSelectionStyleNone
     cell
   end
 
   def fillWithComment(comment, inTableView:tableView)
     @commentLabel.text = comment.data['body']
-    @timeLabel.text = "created at #{comment.data['created_at']}"
+    df = NSDateFormatter.alloc.init
+    df.setDateFormat "yyyy/MM/dd HH:mm:ss '-0400'"
+    myDate = df.dateFromString comment.data['created_at']
+    calendar = NSCalendar.currentCalendar
+    components = calendar.components(NSHourCalendarUnit | NSMinuteCalendarUnit | NSDayCalendarUnit, fromDate: myDate)
+    @timeLabel.text = "#{components.hour.to_s} hours ago"
     self.textLabel.text = comment.data['player']['name']
 
     unless comment.avatar
@@ -53,6 +59,6 @@ class MCShotCommentsTableViewCell < UITableViewCell
                                      :font => UIFont.boldSystemFontOfSize(17),
                                      :textColor => UIColor.blackColor }
     @commentLabel.frame = [[65,41],[self.frame.size.width - 95, self.frame.size.height - 47]]
-    @timeLabel.frame = [[65,26],[self.frame.size.width - 95, 15]]
+    @timeLabel.frame = [[65,24],[self.frame.size.width - 95, 15]]
   end
 end
