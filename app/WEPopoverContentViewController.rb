@@ -38,6 +38,7 @@ class WEPopoverContentViewController < UITableViewController
 
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     self.gridView.loadGridData(@data[indexPath.row].downcase)
+    self.gridView.title = @data[indexPath.row]
     self.popover.dismissPopoverAnimated(true)
     self.gridView.popoverController = nil
   end
