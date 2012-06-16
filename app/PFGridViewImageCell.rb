@@ -31,6 +31,7 @@ class PFGridViewImageCell < PFGridViewCell
           shot.image_small = UIImage.alloc.initWithData(image_data)
           Dispatch::Queue.main.sync do
             @imageView.image = shot.image_small
+            animate
             #gridView.reloadData
           end
         end
@@ -39,4 +40,12 @@ class PFGridViewImageCell < PFGridViewCell
       @imageView.image = shot.image_small
     end
   end 
+
+  # placing this inside `Dispatch::Queue.concurrent.async` caused a silent crash...
+  def animate
+    @imageView.alpha = 0
+    UIView.animateWithDuration(0.2, animations: lambda {
+      @imageView.alpha =1 
+      }, completion: nil)
+  end
 end
