@@ -295,7 +295,9 @@
     
     if (scrollView == gridView) {
         [owner scrollFromSection:self offsetY:gridView.contentOffset.y];
+        [owner.delegate scrollViewDidScroll:scrollView];
     }
+
 }
 
 @end

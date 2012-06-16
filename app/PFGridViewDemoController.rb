@@ -1,6 +1,6 @@
 class PFGridViewDemoViewController < UIViewController
 
-  attr_accessor :popoverController
+  attr_accessor :popoverController, :state
 
   def viewDidLoad
     super
@@ -24,19 +24,28 @@ class PFGridViewDemoViewController < UIViewController
 
     @type = "popular"
     @section.gridView.addPullToRefreshWithActionHandler lambda {
-        loadGridData(@type)
+        loadGridData(@type, 1)
     }
+    @page = 1
 
-    loadGridData(@type)
+    # @section.gridView.addInfiniteScrollingWithActionHandler lambda {
+    #     NSLog("load more data")
+    # }
+
+    # @section.gridView.delegate = self
+
+    loadGridData(@type, 1)
   end
 
-  def loadGridData(type)
-    @shots = [[]]
+  def loadGridData(type, page)
+    @shots = [] if page == 1
+
     # you cant pass a local variable into an async block!
     @type = type
+    @page_temp = page
     Dispatch::Queue.concurrent.async do 
       error_ptr = Pointer.new(:object)
-      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{@type}?page=1&per_page=28"), options:NSDataReadingUncached, error:error_ptr)
+      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{@type}?page=#{@page_temp}&per_page=28"), options:NSDataReadingUncached, error:error_ptr)
       unless data
         presentError error_ptr[0]
         return
@@ -52,7 +61,9 @@ class PFGridViewDemoViewController < UIViewController
         json['shots'].each do |shot|
           new_shots << Shot.new(shot)
         end
-        @shots = new_shots.each_slice(4).to_a
+        new_shots.each_slice(4).to_a.each do |shot_group|
+          @shots << shot_group
+        end
         @demoGridView.reloadData
         @section.gridView.pullToRefreshView.stopAnimating
       end
@@ -177,5 +188,27 @@ class PFGridViewDemoViewController < UIViewController
     return unless cellView.imageView.image
     @shotZoomViewController = MCShotZoomViewController.alloc.initWithCellView(cellView)
     cellView.superview.superview.superview.superview.superview.superview.superview.superview.addSubview(@shotZoomViewController.view)
+  end
+
+  def scrollViewDidScroll scrollView
+    scrollOffsetThreshold = scrollView.contentSize.height-scrollView.bounds.size.height
+        
+    if scrollView.contentOffset.y > [scrollOffsetThreshold, scrollView.bounds.size.height-scrollView.contentSize.height].max
+      self.state = :refresh
+    elsif scrollView.contentOffset.y < scrollOffsetThreshold
+      self.state = :stop
+    end
+  end
+
+  def state=(state)
+    return if state == @state
+    case state
+    when :stop
+      @state = :stop
+    when :refresh
+      loadGridData(@type, @page+1)
+      @page += 1
+      @state = :refresh
+    end
   end
 end
