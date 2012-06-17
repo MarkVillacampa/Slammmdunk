@@ -1,5 +1,7 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project'
+require 'rubygems'
+require 'motion-cocoapods'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.rake
@@ -9,6 +11,7 @@ Motion::Project::App.setup do |app|
   app.sdk_version = "5.0"
 
   app.frameworks << "QuartzCore"
+  app.frameworks << "CoreText"
 
   app.icons = ["Icon@2x.png"]
 
@@ -31,4 +34,9 @@ Motion::Project::App.setup do |app|
   app.vendor_project( "vendor/SVPullToRefresh", :xcode,
   :xcodeproj => "SVPullToRefresh.xcodeproj", :target => "SVPullToRefresh", :products => ["libSVPullToRefresh.a"],
   :headers_dir => "SVPullToRefresh")
+
+  app.pods do
+    dependency 'Nimbus/Core'
+    dependency 'Nimbus/AttributedLabel'
+  end
 end

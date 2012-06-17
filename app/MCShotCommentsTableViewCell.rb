@@ -4,9 +4,11 @@ class MCShotCommentsTableViewCell < UITableViewCell
     super
     @stylesheet = :main
     layout contentView do
-      @commentLabel = subview(UILabel, :comment_label, {font: UIFont.systemFontOfSize(14)})
+      @commentLabel = subview(NIAttributedLabel, :comment_label, {font: UIFont.systemFontOfSize(14)})
       @timeLabel = subview(UILabel, :time_label, {font: UIFont.systemFontOfSize(10)})
     end
+
+    @commentLabel.delegate = self
     self
   end
 
@@ -18,13 +20,17 @@ class MCShotCommentsTableViewCell < UITableViewCell
   end
 
   def fillWithComment(comment, inTableView:tableView)
-    @commentLabel.text = comment.data['body']
+    @commentLabel.text = comment.data['body'].text
+    @commentLabel.explicitLinkLocations = comment.data['body'].explicitLinkLocations
+    @commentLabel.autoDetectLinks = true
+
     df = NSDateFormatter.alloc.init
     df.setDateFormat "yyyy/MM/dd HH:mm:ss '-0400'"
     myDate = df.dateFromString comment.data['created_at']
     calendar = NSCalendar.currentCalendar
     components = calendar.components(NSHourCalendarUnit | NSMinuteCalendarUnit | NSDayCalendarUnit, fromDate: myDate)
     @timeLabel.text = "#{components.hour.to_s} hours ago"
+
     self.textLabel.text = comment.data['player']['name']
 
     unless comment.avatar
@@ -46,7 +52,7 @@ class MCShotCommentsTableViewCell < UITableViewCell
 
   def self.heightForCell(comment, width)
     constrain = [225, 1000]
-    size = comment.data['body'].sizeWithFont(UIFont.systemFontOfSize(14), constrainedToSize:constrain)
+    size = comment.data['body'].text.sizeWithFont(UIFont.systemFontOfSize(14), constrainedToSize:constrain)
     [60, size.height + 47].max
   end
 
@@ -58,7 +64,12 @@ class MCShotCommentsTableViewCell < UITableViewCell
                                      :backgroundColor => UIColor.clearColor,
                                      :font => UIFont.boldSystemFontOfSize(17),
                                      :textColor => UIColor.blackColor }
-    @commentLabel.frame = [[65,41],[self.frame.size.width - 95, self.frame.size.height - 47]]
+    @commentLabel.frame = [[65,40],[self.frame.size.width - 95, self.frame.size.height - 40]]
     @timeLabel.frame = [[65,24],[self.frame.size.width - 95, 15]]
   end
+
+  def attributedLabel(attributedLabel, didSelectLink: url, atPoint: point)
+    puts attributedLabel.text
+  end
+
 end

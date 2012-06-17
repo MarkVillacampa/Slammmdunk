@@ -1,0 +1,804 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<struct type='{NILinkedListNode=&quot;object&quot;@&quot;prev&quot;^{NILinkedListNode}&quot;next&quot;^{NILinkedListNode}}' name='NILinkedListNode'>
+<field type='@' name='object' declared_type='id'/>
+<field type='^{NILinkedListNode=@^{NILinkedListNode}^{NILinkedListNode}}' name='prev' declared_type='struct NILinkedListNode*'/>
+<field type='^{NILinkedListNode=@^{NILinkedListNode}^{NILinkedListNode}}' name='next' declared_type='struct NILinkedListNode*'/>
+</struct>
+<constant type='B' name='NIDebugAssertionsShouldBreak' declared_type='BOOL'/>
+<constant type='@' const='true' name='NIImageErrorKey' declared_type='NSString*'/>
+<constant type='i' name='NIMaxLogLevel' declared_type='NSInteger'/>
+<constant type='@' const='true' name='NINimbusErrorDomain' declared_type='NSString*'/>
+<enum name='NIIOS_2_0' value='20000'/>
+<enum name='NIIOS_2_1' value='20100'/>
+<enum name='NIIOS_2_2' value='20200'/>
+<enum name='NIIOS_3_0' value='30000'/>
+<enum name='NIIOS_3_1' value='30100'/>
+<enum name='NIIOS_3_2' value='30200'/>
+<enum name='NIIOS_4_0' value='40000'/>
+<enum name='NIIOS_4_1' value='40100'/>
+<enum name='NIIOS_4_2' value='40200'/>
+<enum name='NIIOS_4_3' value='40300'/>
+<enum name='NIIOS_5_0' value='50000'/>
+<enum name='NIImageTooSmall' value='1'/>
+<enum name='NILOGLEVEL_ERROR' value='1'/>
+<enum name='NILOGLEVEL_INFO' value='5'/>
+<enum name='NILOGLEVEL_WARNING' value='3'/>
+<enum name='UITextAlignmentJustify' value='3'/>
+<enum name='UIViewAutoresizingFlexibleDimensions' value='18'/>
+<enum name='UIViewAutoresizingFlexibleMargins' value='45'/>
+<function name='NICellContentPadding'>
+<retval type='{UIEdgeInsets=ffff}' declared_type='UIEdgeInsets'/>
+</function>
+<function name='NICreateNonRetainingMutableArray'>
+<retval type='@' declared_type='NSMutableArray*'/>
+</function>
+<function name='NICreateNonRetainingMutableDictionary'>
+<retval type='@' declared_type='NSMutableDictionary*'/>
+</function>
+<function name='NICreateNonRetainingMutableSet'>
+<retval type='@' declared_type='NSMutableSet*'/>
+</function>
+<function name='NIDeviceOSVersionIsAtLeast'>
+<arg type='d' name='versionNumber' declared_type='double'/>
+<retval type='B' declared_type='BOOL'/>
+</function>
+<function name='NIDeviceRotationDuration'>
+<arg type='B' name='isFlippingUpsideDown' declared_type='BOOL'/>
+<retval type='d' declared_type='NSTimeInterval'/>
+</function>
+<function name='NIDisableNetworkActivityDebugging'>
+<retval type='v' declared_type='void'/>
+</function>
+<function name='NIEnableNetworkActivityDebugging'>
+<retval type='v' declared_type='void'/>
+</function>
+<function name='NIInterfaceOrientation'>
+<retval type='i' declared_type='UIInterfaceOrientation'/>
+</function>
+<function name='NIIsArrayWithObjects'>
+<arg type='@' name='object' declared_type='id'/>
+<retval type='B' declared_type='BOOL'/>
+</function>
+<function name='NIIsPad'>
+<retval type='B' declared_type='BOOL'/>
+</function>
+<function name='NIIsSetWithObjects'>
+<arg type='@' name='object' declared_type='id'/>
+<retval type='B' declared_type='BOOL'/>
+</function>
+<function name='NIIsStringWithAnyText'>
+<arg type='@' name='object' declared_type='id'/>
+<retval type='B' declared_type='BOOL'/>
+</function>
+<function name='NIIsSupportedOrientation'>
+<arg type='i' name='orientation' declared_type='UIInterfaceOrientation'/>
+<retval type='B' declared_type='BOOL'/>
+</function>
+<function name='NIMakeNSRangeFromCFRange'>
+<arg type='{_CFRange=ii}' name='range' declared_type='CFRange'/>
+<retval type='{_NSRange=II}' declared_type='NSRange'/>
+</function>
+<function name='NINetworkActivityTaskDidFinish'>
+<retval type='v' declared_type='void'/>
+</function>
+<function name='NINetworkActivityTaskDidStart'>
+<retval type='v' declared_type='void'/>
+</function>
+<function name='NIPathForBundleResource'>
+<arg type='@' name='bundle' declared_type='NSBundle*'/>
+<arg type='@' name='relativePath' declared_type='NSString*'/>
+<retval type='@' declared_type='NSString*'/>
+</function>
+<function name='NIPathForCachesResource'>
+<arg type='@' name='relativePath' declared_type='NSString*'/>
+<retval type='@' declared_type='NSString*'/>
+</function>
+<function name='NIPathForDocumentsResource'>
+<arg type='@' name='relativePath' declared_type='NSString*'/>
+<retval type='@' declared_type='NSString*'/>
+</function>
+<function name='NIRectContract'>
+<arg type='{CGRect={CGPoint=ff}{CGSize=ff}}' name='rect' declared_type='CGRect'/>
+<arg type='f' name='dx' declared_type='CGFloat'/>
+<arg type='f' name='dy' declared_type='CGFloat'/>
+<retval type='{CGRect={CGPoint=ff}{CGSize=ff}}' declared_type='CGRect'/>
+</function>
+<function name='NIRectShift'>
+<arg type='{CGRect={CGPoint=ff}{CGSize=ff}}' name='rect' declared_type='CGRect'/>
+<arg type='f' name='dx' declared_type='CGFloat'/>
+<arg type='f' name='dy' declared_type='CGFloat'/>
+<retval type='{CGRect={CGPoint=ff}{CGSize=ff}}' declared_type='CGRect'/>
+</function>
+<function name='NIRotateTransformForOrientation'>
+<arg type='i' name='orientation' declared_type='UIInterfaceOrientation'/>
+<retval type='{CGAffineTransform=ffffff}' declared_type='CGAffineTransform'/>
+</function>
+<function name='NIScreenScale'>
+<retval type='f' declared_type='CGFloat'/>
+</function>
+<function name='NIStatusBarAnimationCurve'>
+<retval type='i' declared_type='UIViewAnimationCurve'/>
+</function>
+<function name='NIStatusBarAnimationDuration'>
+<retval type='d' declared_type='NSTimeInterval'/>
+</function>
+<function name='NIStatusBarBoundsChangeAnimationCurve'>
+<retval type='i' declared_type='UIViewAnimationCurve'/>
+</function>
+<function name='NIStatusBarBoundsChangeAnimationDuration'>
+<retval type='d' declared_type='NSTimeInterval'/>
+</function>
+<function name='NIStatusBarHeight'>
+<retval type='f' declared_type='CGFloat'/>
+</function>
+<function name='NISwapClassMethods'>
+<arg type='#' name='cls' declared_type='Class'/>
+<arg type=':' name='originalSel' declared_type='SEL'/>
+<arg type=':' name='newSel' declared_type='SEL'/>
+<retval type='v' declared_type='void'/>
+</function>
+<function name='NISwapInstanceMethods'>
+<arg type='#' name='cls' declared_type='Class'/>
+<arg type=':' name='originalSel' declared_type='SEL'/>
+<arg type=':' name='newSel' declared_type='SEL'/>
+<retval type='v' declared_type='void'/>
+</function>
+<function name='NIToolbarHeightForOrientation'>
+<arg type='i' name='orientation' declared_type='UIInterfaceOrientation'/>
+<retval type='f' declared_type='CGFloat'/>
+</function>
+<function name='NIUIPopoverControllerClass'>
+<retval type='#' declared_type='Class'/>
+</function>
+<function name='NIUITapGestureRecognizerClass'>
+<retval type='#' declared_type='Class'/>
+</function>
+<function name='boundf'>
+<arg type='f' name='value' declared_type='CGFloat'/>
+<arg type='f' name='min' declared_type='CGFloat'/>
+<arg type='f' name='max' declared_type='CGFloat'/>
+<retval type='f' declared_type='CGFloat'/>
+</function>
+<function name='boundi'>
+<arg type='i' name='value' declared_type='NSInteger'/>
+<arg type='i' name='min' declared_type='NSInteger'/>
+<arg type='i' name='max' declared_type='NSInteger'/>
+<retval type='i' declared_type='NSInteger'/>
+</function>
+<class name='NIAttributedLabel'>
+<method selector='addLink:range:'>
+<arg type='@' index='0' name='urlLink' declared_type='NSURL*'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='attributedString'>
+<retval type='@' declared_type='NSAttributedString*'/>
+</method>
+<method selector='autoDetectLinks'>
+<retval type='B' declared_type='BOOL'/>
+</method>
+<method selector='delegate'>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='linkColor'>
+<retval type='@' declared_type='UIColor*'/>
+</method>
+<method selector='linkHighlightColor'>
+<retval type='@' declared_type='UIColor*'/>
+</method>
+<method selector='linksHaveUnderlines'>
+<retval type='B' declared_type='BOOL'/>
+</method>
+<method selector='removeAllExplicitLinks'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setAttributedString:'>
+<arg type='@' index='0' name='attributedString' declared_type='NSAttributedString*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setAutoDetectLinks:'>
+<arg type='B' index='0' name='autoDetectLinks' declared_type='BOOL'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setDelegate:'>
+<arg type='@' index='0' name='delegate' declared_type='id'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setFont:range:'>
+<arg type='@' index='0' name='font' declared_type='UIFont*'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setLinkColor:'>
+<arg type='@' index='0' name='linkColor' declared_type='UIColor*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setLinkHighlightColor:'>
+<arg type='@' index='0' name='linkHighlightColor' declared_type='UIColor*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setLinksHaveUnderlines:'>
+<arg type='B' index='0' name='linksHaveUnderlines' declared_type='BOOL'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeColor:'>
+<arg type='@' index='0' name='strokeColor' declared_type='UIColor*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeColor:range:'>
+<arg type='@' index='0' name='color' declared_type='UIColor*'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeWidth:'>
+<arg type='f' index='0' name='strokeWidth' declared_type='CGFloat'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeWidth:range:'>
+<arg type='f' index='0' name='width' declared_type='CGFloat'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTextColor:range:'>
+<arg type='@' index='0' name='textColor' declared_type='UIColor*'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTextKern:'>
+<arg type='f' index='0' name='textKern' declared_type='CGFloat'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTextKern:range:'>
+<arg type='f' index='0' name='kern' declared_type='CGFloat'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setUnderlineStyle:'>
+<arg type='i' index='0' name='underlineStyle' declared_type='CTUnderlineStyle'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setUnderlineStyle:modifier:range:'>
+<arg type='i' index='0' name='style' declared_type='CTUnderlineStyle'/>
+<arg type='i' index='1' name='modifier' declared_type='CTUnderlineStyleModifiers'/>
+<arg type='{_NSRange=II}' index='2' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setUnderlineStyleModifier:'>
+<arg type='i' index='0' name='underlineStyleModifier' declared_type='CTUnderlineStyleModifiers'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='strokeColor'>
+<retval type='@' declared_type='UIColor*'/>
+</method>
+<method selector='strokeWidth'>
+<retval type='f' declared_type='CGFloat'/>
+</method>
+<method selector='textKern'>
+<retval type='f' declared_type='CGFloat'/>
+</method>
+<method selector='underlineStyle'>
+<retval type='i' declared_type='CTUnderlineStyle'/>
+</method>
+<method selector='underlineStyleModifier'>
+<retval type='i' declared_type='CTUnderlineStyleModifiers'/>
+</method>
+</class>
+<class name='NIImageMemoryCache'>
+<method selector='maxNumberOfPixels'>
+<retval type='I' declared_type='NSUInteger'/>
+</method>
+<method selector='maxNumberOfPixelsUnderStress'>
+<retval type='I' declared_type='NSUInteger'/>
+</method>
+<method selector='numberOfPixels'>
+<retval type='I' declared_type='NSUInteger'/>
+</method>
+<method selector='setMaxNumberOfPixels:'>
+<arg type='I' index='0' name='maxNumberOfPixels' declared_type='NSUInteger'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setMaxNumberOfPixelsUnderStress:'>
+<arg type='I' index='0' name='maxNumberOfPixelsUnderStress' declared_type='NSUInteger'/>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<class name='NILinkedList'>
+<method selector='addObject:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<retval type='^v' declared_type='NILinkedListLocation*'/>
+</method>
+<method selector='addObjectsFromArray:'>
+<arg type='@' index='0' name='array' declared_type='NSArray*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='allObjects'>
+<retval type='@' declared_type='NSArray*'/>
+</method>
+<method selector='containsObject:'>
+<arg type='@' index='0' name='anObject' declared_type='id'/>
+<retval type='B' declared_type='BOOL'/>
+</method>
+<method selector='count'>
+<retval type='I' declared_type='NSUInteger'/>
+</method>
+<method selector='description'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='firstObject'>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='initWithArray:'>
+<arg type='@' index='0' name='anArray' declared_type='NSArray*'/>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='lastObject'>
+<retval type='@' declared_type='id'/>
+</method>
+<method class_method='true' selector='linkedList'>
+<retval type='@' declared_type='NILinkedList*'/>
+</method>
+<method class_method='true' selector='linkedListWithArray:'>
+<arg type='@' index='0' name='array' declared_type='NSArray*'/>
+<retval type='@' declared_type='NILinkedList*'/>
+</method>
+<method selector='locationOfObject:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<retval type='^v' declared_type='NILinkedListLocation*'/>
+</method>
+<method selector='objectAtLocation:'>
+<arg type='^v' index='0' name='location' declared_type='NILinkedListLocation*'/>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='objectEnumerator'>
+<retval type='@' declared_type='NSEnumerator*'/>
+</method>
+<method selector='removeAllObjects'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='removeFirstObject'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='removeLastObject'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='removeObject:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='removeObjectAtLocation:'>
+<arg type='^v' index='0' name='location' declared_type='NILinkedListLocation*'/>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<class name='NIMemoryCache'>
+<method selector='containsObjectWithName:'>
+<arg type='@' index='0' name='name' declared_type='NSString*'/>
+<retval type='B' declared_type='BOOL'/>
+</method>
+<method selector='count'>
+<retval type='I' declared_type='NSUInteger'/>
+</method>
+<method selector='dateOfLastAccessWithName:'>
+<arg type='@' index='0' name='name' declared_type='NSString*'/>
+<retval type='@' declared_type='NSDate*'/>
+</method>
+<method selector='didSetObject:withName:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<arg type='@' index='1' name='name' declared_type='NSString*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='initWithCapacity:'>
+<arg type='I' index='0' name='capacity' declared_type='NSUInteger'/>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='nameOfLeastRecentlyUsedObject'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='nameOfMostRecentlyUsedObject'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='objectWithName:'>
+<arg type='@' index='0' name='name' declared_type='NSString*'/>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='reduceMemoryUsage'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='removeAllObjects'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='removeObjectWithName:'>
+<arg type='@' index='0' name='name' declared_type='NSString*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='storeObject:withName:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<arg type='@' index='1' name='name' declared_type='NSString*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='storeObject:withName:expiresAfter:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<arg type='@' index='1' name='name' declared_type='NSString*'/>
+<arg type='@' index='2' name='expirationDate' declared_type='NSDate*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='willRemoveObject:withName:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<arg type='@' index='1' name='name' declared_type='NSString*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='willSetObject:withName:previousObject:'>
+<arg type='@' index='0' name='object' declared_type='id'/>
+<arg type='@' index='1' name='name' declared_type='NSString*'/>
+<arg type='@' index='2' name='previousObject' declared_type='id'/>
+<retval type='B' declared_type='BOOL'/>
+</method>
+</class>
+<class name='NINavigationAppearance'>
+<method class_method='true' selector='clear'>
+<retval type='v' declared_type='void'/>
+</method>
+<method class_method='true' selector='count'>
+<retval type='i' declared_type='NSInteger'/>
+</method>
+<method class_method='true' selector='popAppearanceForNavigationController:animated:'>
+<arg type='@' index='0' name='navigationController' declared_type='UINavigationController*'/>
+<arg type='B' index='1' name='animated' declared_type='BOOL'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method class_method='true' selector='pushAppearanceForNavigationController:'>
+<arg type='@' index='0' name='navigationController' declared_type='UINavigationController*'/>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<class name='NINetworkRequestOperation'>
+<method selector='cachePolicy'>
+<retval type='I' declared_type='NSURLRequestCachePolicy'/>
+</method>
+<method selector='data'>
+<retval type='@' declared_type='NSData*'/>
+</method>
+<method selector='initWithURL:'>
+<arg type='@' index='0' name='url' declared_type='NSURL*'/>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='processedObject'>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='setCachePolicy:'>
+<arg type='I' index='0' name='cachePolicy' declared_type='NSURLRequestCachePolicy'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setData:'>
+<arg type='@' index='0' name='data' declared_type='NSData*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setProcessedObject:'>
+<arg type='@' index='0' name='processedObject' declared_type='id'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTimeout:'>
+<arg type='d' index='0' name='timeout' declared_type='NSTimeInterval'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setUrl:'>
+<arg type='@' index='0' name='url' declared_type='NSURL*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='timeout'>
+<retval type='d' declared_type='NSTimeInterval'/>
+</method>
+<method selector='url'>
+<retval type='@' declared_type='NSURL*'/>
+</method>
+</class>
+<class name='NIOperation'>
+<method selector='delegate'>
+<retval type='@' declared_type='id'/>
+</method>
+<method selector='didFailWithError:'>
+<arg type='@' index='0' name='error' declared_type='NSError*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='didFailWithErrorBlock'>
+<retval type='@?' declared_type='NIErrorBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<arg type='@' declared_type='NSError*'/>
+<retval type='v' declared_type='void'/>
+</retval>
+</method>
+<method selector='didFinish'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='didFinishBlock'>
+<retval type='@?' declared_type='NIBasicBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</retval>
+</method>
+<method selector='didStart'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='didStartBlock'>
+<retval type='@?' declared_type='NIBasicBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</retval>
+</method>
+<method selector='lastError'>
+<retval type='@' declared_type='NSError*'/>
+</method>
+<method selector='setDelegate:'>
+<arg type='@' index='0' name='delegate' declared_type='id'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setDidFailWithErrorBlock:'>
+<arg type='@?' index='0' name='didFailWithErrorBlock' declared_type='NIErrorBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<arg type='@' declared_type='NSError*'/>
+<retval type='v' declared_type='void'/>
+</arg>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setDidFinishBlock:'>
+<arg type='@?' index='0' name='didFinishBlock' declared_type='NIBasicBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</arg>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setDidStartBlock:'>
+<arg type='@?' index='0' name='didStartBlock' declared_type='NIBasicBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</arg>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setLastError:'>
+<arg type='@' index='0' name='lastError' declared_type='NSError*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTag:'>
+<arg type='i' index='0' name='tag' declared_type='NSInteger'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setWillFinishBlock:'>
+<arg type='@?' index='0' name='willFinishBlock' declared_type='NIBasicBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</arg>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='tag'>
+<retval type='i' declared_type='NSInteger'/>
+</method>
+<method selector='willFinish'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='willFinishBlock'>
+<retval type='@?' declared_type='NIBasicBlock' function_pointer='true'>
+<arg type='@' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</retval>
+</method>
+</class>
+<class name='NIViewRecycler'>
+<method selector='dequeueReusableViewWithIdentifier:'>
+<arg type='@' index='0' name='reuseIdentifier' declared_type='NSString*'/>
+<retval type='@' declared_type='UIView*'/>
+</method>
+<method selector='recycleView:'>
+<arg type='@' index='0' name='view' declared_type='UIView*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='removeAllViews'>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<class name='NSData'>
+<method selector='md5Hash'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='sha1Hash'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+</class>
+<class name='NSMutableAttributedString'>
+<method selector='setFont:'>
+<arg type='@' index='0' name='font' declared_type='UIFont*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setFont:range:'>
+<arg type='@' index='0' name='font' declared_type='UIFont*'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setKern:'>
+<arg type='f' index='0' name='kern' declared_type='CGFloat'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setKern:range:'>
+<arg type='f' index='0' name='kern' declared_type='CGFloat'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeColor:'>
+<arg type='@' index='0' name='color' declared_type='UIColor*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeColor:range:'>
+<arg type='@' index='0' name='color' declared_type='UIColor*'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeWidth:'>
+<arg type='f' index='0' name='width' declared_type='CGFloat'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setStrokeWidth:range:'>
+<arg type='f' index='0' name='width' declared_type='CGFloat'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTextAlignment:lineBreakMode:'>
+<arg type='C' index='0' name='textAlignment' declared_type='CTTextAlignment'/>
+<arg type='C' index='1' name='lineBreakMode' declared_type='CTLineBreakMode'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTextAlignment:lineBreakMode:range:'>
+<arg type='C' index='0' name='textAlignment' declared_type='CTTextAlignment'/>
+<arg type='C' index='1' name='lineBreakMode' declared_type='CTLineBreakMode'/>
+<arg type='{_NSRange=II}' index='2' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTextColor:'>
+<arg type='@' index='0' name='color' declared_type='UIColor*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setTextColor:range:'>
+<arg type='@' index='0' name='color' declared_type='UIColor*'/>
+<arg type='{_NSRange=II}' index='1' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setUnderlineStyle:modifier:'>
+<arg type='i' index='0' name='style' declared_type='CTUnderlineStyle'/>
+<arg type='i' index='1' name='modifier' declared_type='CTUnderlineStyleModifiers'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='setUnderlineStyle:modifier:range:'>
+<arg type='i' index='0' name='style' declared_type='CTUnderlineStyle'/>
+<arg type='i' index='1' name='modifier' declared_type='CTUnderlineStyleModifiers'/>
+<arg type='{_NSRange=II}' index='2' name='range' declared_type='NSRange'/>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<class name='NSObject'>
+<method selector='attributedLabel:didSelectLink:atPoint:'>
+<arg type='@' index='0' name='attributedLabel' declared_type='NIAttributedLabel*'/>
+<arg type='@' index='1' name='url' declared_type='NSURL*'/>
+<arg type='{CGPoint=ff}' index='2' name='point' declared_type='CGPoint'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='nimbusOperationDidFail:withError:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<arg type='@' index='1' name='error' declared_type='NSError*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='nimbusOperationDidFinish:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='nimbusOperationDidStart:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='nimbusOperationWillFinish:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='prepareForReuse'>
+<retval type='v' declared_type='void'/>
+</method>
+<method selector='reuseIdentifier'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='setReuseIdentifier:'>
+<arg type='@' index='0' name='reuseIdentifier' declared_type='NSString*'/>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<class name='NSString'>
+<method selector='heightWithFont:constrainedToWidth:lineBreakMode:'>
+<arg type='@' index='0' name='font' declared_type='UIFont*'/>
+<arg type='f' index='1' name='width' declared_type='CGFloat'/>
+<arg type='i' index='2' name='lineBreakMode' declared_type='UILineBreakMode'/>
+<retval type='f' declared_type='CGFloat'/>
+</method>
+<method selector='isWhitespaceAndNewlines'>
+<retval type='B' declared_type='BOOL'/>
+</method>
+<method selector='md5Hash'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='queryContentsUsingEncoding:'>
+<arg type='I' index='0' name='encoding' declared_type='NSStringEncoding'/>
+<retval type='@' declared_type='NSDictionary*'/>
+</method>
+<method selector='sha1Hash'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='stringByAddingPercentEscapesForURLParameter'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='stringByAddingQueryDictionary:'>
+<arg type='@' index='0' name='query' declared_type='NSDictionary*'/>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method selector='versionStringCompare:'>
+<arg type='@' index='0' name='other' declared_type='NSString*'/>
+<retval type='i' declared_type='NSComparisonResult'/>
+</method>
+</class>
+<class name='Nimbus'>
+<method class_method='true' selector='imageMemoryCache'>
+<retval type='@' declared_type='NIImageMemoryCache*'/>
+</method>
+<method class_method='true' selector='networkOperationQueue'>
+<retval type='@' declared_type='NSOperationQueue*'/>
+</method>
+<method class_method='true' selector='setImageMemoryCache:'>
+<arg type='@' index='0' name='imageMemoryCache' declared_type='NIImageMemoryCache*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method class_method='true' selector='setNetworkOperationQueue:'>
+<arg type='@' index='0' name='queue' declared_type='NSOperationQueue*'/>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<class name='UIView'>
+<method selector='centerWithin:'>
+<arg type='@' index='0' name='otherView' declared_type='UIView*'/>
+<retval type='v' declared_type='void'/>
+</method>
+</class>
+<informal_protocol name='NIAttributedLabelDelegate'>
+<method type='v24@0:4@8@12{CGPoint=ff}16' selector='attributedLabel:didSelectLink:atPoint:'>
+<arg type='@' index='0' name='attributedLabel' declared_type='NIAttributedLabel*'/>
+<arg type='@' index='1' name='url' declared_type='NSURL*'/>
+<arg type='{CGPoint=ff}' index='2' name='point' declared_type='CGPoint'/>
+<retval type='v' declared_type='void'/>
+</method>
+</informal_protocol>
+<informal_protocol name='NIOperationDelegate'>
+<method type='v16@0:4@8@12' selector='nimbusOperationDidFail:withError:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<arg type='@' index='1' name='error' declared_type='NSError*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method type='v12@0:4@8' selector='nimbusOperationDidFinish:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method type='v12@0:4@8' selector='nimbusOperationDidStart:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</method>
+<method type='v12@0:4@8' selector='nimbusOperationWillFinish:'>
+<arg type='@' index='0' name='operation' declared_type='NIOperation*'/>
+<retval type='v' declared_type='void'/>
+</method>
+</informal_protocol>
+<informal_protocol name='NIRecyclableView'>
+<method type='v8@0:4' selector='prepareForReuse'>
+<retval type='v' declared_type='void'/>
+</method>
+<method type='@8@0:4' selector='reuseIdentifier'>
+<retval type='@' declared_type='NSString*'/>
+</method>
+<method type='v12@0:4@8' selector='setReuseIdentifier:'>
+<arg type='@' index='0' name='reuseIdentifier' declared_type='NSString*'/>
+<retval type='v' declared_type='void'/>
+</method>
+</informal_protocol>
+</signatures>
