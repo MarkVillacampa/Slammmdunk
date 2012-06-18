@@ -4,10 +4,9 @@ class MCShotCommentsTableViewCell < UITableViewCell
     super
     @stylesheet = :main
     layout contentView do
-      @commentLabel = subview(NIAttributedLabel, :comment_label, {font: UIFont.systemFontOfSize(14)})
+      @commentLabel = subview(NIAttributedLabel, :comment_label)
       @timeLabel = subview(UILabel, :time_label, {font: UIFont.systemFontOfSize(10)})
     end
-
     @commentLabel.delegate = self
     self
   end
@@ -21,6 +20,7 @@ class MCShotCommentsTableViewCell < UITableViewCell
 
   def fillWithComment(comment, inTableView:tableView)
     @commentLabel.text = comment.data['body'].text
+    @commentLabel.mutableAttributedString = comment.data['body'].mutableAttributedString
     @commentLabel.explicitLinkLocations = comment.data['body'].explicitLinkLocations
     @commentLabel.autoDetectLinks = true
 
@@ -69,7 +69,7 @@ class MCShotCommentsTableViewCell < UITableViewCell
   end
 
   def attributedLabel(attributedLabel, didSelectLink: url, atPoint: point)
-    puts attributedLabel.text
+    puts url.absoluteString
   end
 
 end
