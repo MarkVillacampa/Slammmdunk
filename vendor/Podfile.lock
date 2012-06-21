@@ -1,4 +1,5 @@
 PODS:
+  - DTCoreText (1.0.1)
   - Nimbus/AttributedLabel (0.9.3):
     - Nimbus (= 0.9.3)
     - Nimbus/Core
@@ -9,5 +10,6 @@ DOWNLOAD_ONLY:
   - Nimbus (0.9.3)
 
 DEPENDENCIES:
+  - DTCoreText
   - Nimbus/AttributedLabel
   - Nimbus/Core

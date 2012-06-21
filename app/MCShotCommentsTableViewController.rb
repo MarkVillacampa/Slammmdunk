@@ -36,24 +36,27 @@ class MCShotCommentsTableViewController < UITableViewController
     tableView.dataSource = tableView.delegate = self
 
     self.tableView.addPullToRefreshWithActionHandler lambda {
-        reloadComments
+      @shot.page = 1
+      loadComments(1, overide: true)
     }
     
-    # self.tableView.addInfiniteScrollingWithActionHandler lambda {
-    #     NSLog("load more data")
-    # }
-    
-    # self.tableView.pullToRefreshView.triggerRefresh
+    self.tableView.addInfiniteScrollingWithActionHandler lambda {
+      loadComments(@shot.page+1, overide: false)
+    }
 
     if @shot.comments.length == 0
-      reloadComments
+      loadComments(1, overide: true)
     end
   end
 
-  def reloadComments
+  def loadComments(page, overide: overide)
+    #you cant pass a local variable into a dispatch block!
+    @page_temp = page
+    @shot.page = page
+    puts page
     Dispatch::Queue.concurrent.async do 
       error_ptr = Pointer.new(:object)
-      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{shot.data['id']}/comments"), options:NSDataReadingUncached, error:error_ptr)
+      data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString("http://api.dribbble.com/shots/#{shot.data['id']}/comments?page=#{@page_temp}&per_page=30"), options:NSDataReadingUncached, error:error_ptr)
       unless data
         presentError error_ptr[0]
         return
@@ -66,10 +69,23 @@ class MCShotCommentsTableViewController < UITableViewController
 
       Dispatch::Queue.main.sync do
         new_comments = []
+        @total_pages = json['pages']
+        puts @total_pages
+        if @total_pages == @page_temp
+          self.tableView.tableFooterView.removeFromSuperview
+          self.tableView.tableFooterView = nil
+          puts "disabled"
+        end
         json['comments'].each do |comment|
           new_comments << Comment.new(comment)
         end
-        @shot.comments = new_comments
+        if overide
+          @shot.comments = new_comments
+        else
+          new_comments.each do |comment|
+            @shot.comments << comment
+          end
+        end
         tableView.reloadData
         tableView.pullToRefreshView.stopAnimating
       end
@@ -103,5 +119,4 @@ class MCShotCommentsTableViewController < UITableViewController
   def shouldAutorotateToInterfaceOrientation(orientation)
     autorotateToOrientation(orientation)
   end
-
 end

@@ -8,7 +8,7 @@ Motion::Project::App.setup do |app|
   app.name = 'Slammmdunk'
 
   app.provisioning_profile = 'MarkDev.mobileprovision'
-  app.sdk_version = "5.0"
+  app.sdk_version = "5.1"
 
   app.frameworks << "QuartzCore"
   app.frameworks << "CoreText"
@@ -36,6 +36,7 @@ Motion::Project::App.setup do |app|
   :headers_dir => "SVPullToRefresh")
 
   app.pods do
+    dependency 'DTCoreText'
     dependency 'Nimbus/Core'
     dependency 'Nimbus/AttributedLabel'
   end
