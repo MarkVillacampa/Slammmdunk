@@ -29,7 +29,7 @@ Teacup::Stylesheet.new :main do
     })
 
   style :comment_label,
-    numberOfLines: 0,
+    # numberOfLines: 0,
     # font: UIFont.systemFontOfSize(14),
     backgroundColor: UIColor.clearColor
 

@@ -72,7 +72,6 @@ class MCShotCommentsTableViewController < UITableViewController
         @total_pages = json['pages']
         puts @total_pages
         if @total_pages == @page_temp
-          self.tableView.tableFooterView.removeFromSuperview
           self.tableView.tableFooterView = nil
           puts "disabled"
         end

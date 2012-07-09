@@ -24,12 +24,16 @@ class PFGridViewImageCell < PFGridViewCell
 
   def fillWithShot(shot, inGridView:gridView)
     unless shot.image_small
+      @activityIndicator = UIActivityIndicatorView.alloc.initWithActivityIndicatorStyle(UIActivityIndicatorViewStyleWhite)
+      @activityIndicator.startAnimating
+      self.addSubview(@activityIndicator)
       @imageView.image = nil
       Dispatch::Queue.concurrent.async do
         image_data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString(shot.data['image_teaser_url']))
         if image_data
           shot.image_small = UIImage.alloc.initWithData(image_data)
           Dispatch::Queue.main.sync do
+            @activityIndicator.removeFromSuperview
             @imageView.image = shot.image_small
             animate
             #gridView.reloadData
@@ -41,7 +45,7 @@ class PFGridViewImageCell < PFGridViewCell
     end
   end 
 
-  # placing this inside `Dispatch::Queue.concurrent.async` caused a silent crash...
+  # placing this inside `Dispatch::Queue.concurrent.sync` caused a silent crash...
   def animate
     @imageView.alpha = 0
     UIView.animateWithDuration(0.2, animations: lambda {

@@ -4,7 +4,7 @@ class Comment
   def initialize(comment)
     @data = comment.dup
     @avatar = nil
-    format_comment
+    format_three20
   end
 
   def format_comment
@@ -12,7 +12,7 @@ class Comment
     @data['body'] = NIAttributedLabel.alloc.initWithFrame(CGRectZero)
 
     @links = Hash.new
-    comment_text.gsub!(Regexp.new("<a href=\"([a-zA-Z0-9_:/!?.%#-&;=]+)\">([a-zA-Z0-9_@\. \t\n\r\f]+)</a>")) { |match|
+    comment_text.gsub!(Regexp.new("<a href=\"([a-zA-Z0-9_:/!?.%#-&;= \t\n\r\f]+)\">([^<]+)</a>")) { |match|
       @links[$2.to_s] = $1.to_s
       $2.to_s
     }
@@ -44,5 +44,24 @@ class Comment
     @strong.each do |value|
        @data['body'].setFont(UIFont.boldSystemFontOfSize(14), range: @data['body'].text.rangeOfString(value))
     end
+  end
+
+  def format_html
+    html = @data['body']
+    data = html.dataUsingEncoding NSUTF8StringEncoding
+    # maxImageSize = CGSizeMake(self.vie.bounds.size.width - 20.0, self.view.bounds.size.height - 20.0)
+    #options = []
+    attributedString = NSMutableAttributedString.alloc.initWithHTML(data, documentAttributes: nil)
+    attributedString ||= NSMutableAttributedString.alloc.initWithString("")
+    attributedString.addAttribute(KCTFontAttributeName, value:CTFontCreateWithName( "Helvetica", 14.0, nil), range:NSMakeRangeyu(0, attributedString.length))
+    @data['body'] = NIAttributedLabel.alloc.initWithFrame(CGRectZero)
+    @data['body'].text = attributedString.string
+    @data['body'].mutableAttributedString = attributedString
+  end
+
+  def format_three20
+    html = @data['body']
+    data = TTStyledText.textFromXHTML(html, lineBreaks: true, URLs: true)
+    @data['body'] = data
   end
 end

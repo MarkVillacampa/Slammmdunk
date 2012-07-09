@@ -4,10 +4,12 @@ class MCShotCommentsTableViewCell < UITableViewCell
     super
     @stylesheet = :main
     layout contentView do
-      @commentLabel = subview(NIAttributedLabel, :comment_label)
+      @commentLabel = subview(TTStyledTextLabel, :comment_label, { :font => UIFont.systemFontOfSize(14)})
       @timeLabel = subview(UILabel, :time_label, {font: UIFont.systemFontOfSize(10)})
     end
-    @commentLabel.delegate = self
+    # navigator = TTNavigator.navigator
+    # navigator.persistenceMode = TTNavigatorPersistenceModeNone
+    # navigator.delegate = self
     self
   end
 
@@ -19,17 +21,19 @@ class MCShotCommentsTableViewCell < UITableViewCell
   end
 
   def fillWithComment(comment, inTableView:tableView)
-    @commentLabel.text = comment.data['body'].text
-    @commentLabel.mutableAttributedString = comment.data['body'].mutableAttributedString
-    @commentLabel.explicitLinkLocations = comment.data['body'].explicitLinkLocations
-    @commentLabel.autoDetectLinks = true
+    @commentLabel.text = comment.data['body']
 
     df = NSDateFormatter.alloc.init
     df.setDateFormat "yyyy/MM/dd HH:mm:ss '-0400'"
-    myDate = df.dateFromString comment.data['created_at']
+    myDate = df.dateFromString(comment.data['created_at'])
     calendar = NSCalendar.currentCalendar
     components = calendar.components(NSHourCalendarUnit | NSMinuteCalendarUnit | NSDayCalendarUnit, fromDate: myDate)
-    @timeLabel.text = "#{components.hour.to_s} hours ago"
+
+    if components.day == 0
+      @timeLabel.text = "#{components.hour.to_s} hours ago"
+    else
+      @timeLabel.text = "#{components.day.to_s} days ago"
+    end
 
     self.textLabel.text = comment.data['player']['name']
 
@@ -51,9 +55,12 @@ class MCShotCommentsTableViewCell < UITableViewCell
   end
 
   def self.heightForCell(comment, width)
-    constrain = [225, 1000]
-    size = comment.data['body'].text.sizeWithFont(UIFont.systemFontOfSize(14), constrainedToSize:constrain)
-    [60, size.height + 47].max
+    # constrain = [225, 1000]
+    # size = comment.data['body'].sizeWithFont(UIFont.systemFontOfSize(14), constrainedToSize:constrain)
+    comment.data['body'].width = 225
+    comment.data['body'].font = UIFont.systemFontOfSize(14)
+    # [60, size.height + 47].max
+    [60, comment.data['body'].height + 47].max
   end
 
   def layoutSubviews
@@ -68,8 +75,14 @@ class MCShotCommentsTableViewCell < UITableViewCell
     @timeLabel.frame = [[65,24],[self.frame.size.width - 95, 15]]
   end
 
-  def attributedLabel(attributedLabel, didSelectLink: url, atPoint: point)
-    puts url.absoluteString
-  end
+  def navigator(navigator, shouldOpenURL: url)
+    query = url.query
+    UIApplication.sharedApplication.openURL(url.absoluteURL)
 
+    if query == nil
+        return true
+    else 
+        return false
+    end
+  end
 end

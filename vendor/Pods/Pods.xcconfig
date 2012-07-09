@@ -1,4 +1,0 @@
-PODS_ROOT = $(SRCROOT)/Pods
-OTHER_LDFLAGS = -ObjC -all_load -framework MediaPlayer -framework QuartzCore -framework CoreText -framework CoreGraphics -framework ImageIO -lxml2 -framework CoreText -framework CoreGraphics
-ALWAYS_SEARCH_USER_PATHS = YES
-HEADER_SEARCH_PATHS = "$(PODS_ROOT)/Headers" "$(SDKROOT)/usr/include/libxml2" "$(PODS_ROOT)/Headers/DTCoreText" "$(PODS_ROOT)/Headers/Nimbus"
