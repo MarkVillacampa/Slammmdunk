@@ -7,9 +7,9 @@ class MCShotCommentsTableViewCell < UITableViewCell
       @commentLabel = subview(TTStyledTextLabel, :comment_label, { :font => UIFont.systemFontOfSize(14)})
       @timeLabel = subview(UILabel, :time_label, {font: UIFont.systemFontOfSize(10)})
     end
-    # navigator = TTNavigator.navigator
-    # navigator.persistenceMode = TTNavigatorPersistenceModeNone
-    # navigator.delegate = self
+    navigator = TTNavigator.navigator
+    navigator.persistenceMode = TTNavigatorPersistenceModeNone
+    navigator.delegate = self
     self
   end
 

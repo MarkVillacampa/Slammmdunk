@@ -19,20 +19,28 @@ enum {
 
 typedef NSUInteger SVPullToRefreshState;
 
+static CGFloat const SVPullToRefreshViewHeight = 60;
 
-@interface SVPullToRefresh () 
+@interface SVPullToRefreshArrow : UIView
+@property (nonatomic, strong) UIColor *arrowColor;
+@end
+
+
+@interface SVPullToRefresh ()
 
 - (id)initWithScrollView:(UIScrollView*)scrollView;
 - (void)rotateArrow:(float)degrees hide:(BOOL)hide;
 - (void)setScrollViewContentInset:(UIEdgeInsets)contentInset;
 - (void)scrollViewDidScroll:(CGPoint)contentOffset;
 
+- (void)startObservingScrollView;
+- (void)stopObservingScrollView;
+
 @property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
 @property (nonatomic, copy) void (^infiniteScrollingActionHandler)(void);
 @property (nonatomic, readwrite) SVPullToRefreshState state;
 
-@property (nonatomic, strong) UIImageView *arrow;
-@property (nonatomic, strong, readonly) UIImage *arrowImage;
+@property (nonatomic, strong) SVPullToRefreshArrow *arrow;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong) UILabel *titleLabel;
 
@@ -44,6 +52,7 @@ typedef NSUInteger SVPullToRefreshState;
 
 @property (nonatomic, assign) BOOL showsPullToRefresh;
 @property (nonatomic, assign) BOOL showsInfiniteScrolling;
+@property (nonatomic, assign) BOOL isObservingScrollView;
 
 @end
 
@@ -56,11 +65,10 @@ typedef NSUInteger SVPullToRefreshState;
 
 @synthesize state;
 @synthesize scrollView = _scrollView;
-@synthesize arrow, arrowImage, activityIndicatorView, titleLabel, dateLabel, originalScrollViewContentInset, originalTableFooterView, showsPullToRefresh, showsInfiniteScrolling;
+@synthesize arrow, activityIndicatorView, titleLabel, dateLabel, originalScrollViewContentInset, originalTableFooterView, showsPullToRefresh, showsInfiniteScrolling, isObservingScrollView;
 
 - (void)dealloc {
-    [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-    [self.scrollView removeObserver:self forKeyPath:@"frame"];
+    [self stopObservingScrollView];
 }
 
 - (id)initWithScrollView:(UIScrollView *)scrollView {
@@ -68,16 +76,19 @@ typedef NSUInteger SVPullToRefreshState;
     self.scrollView = scrollView;
     
     // default styling values
-    self.arrowColor = [UIColor grayColor];
     self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     self.textColor = [UIColor darkGrayColor];
     
     self.originalScrollViewContentInset = self.scrollView.contentInset;
 
-    [scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-    [scrollView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
-
     return self;
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if(newSuperview == self.scrollView)
+        [self startObservingScrollView];
+    else if(newSuperview == nil)
+        [self stopObservingScrollView];
 }
 
 - (void)layoutSubviews {
@@ -95,7 +106,7 @@ typedef NSUInteger SVPullToRefreshState;
     CGRect arrowFrame = arrow.frame;
     arrowFrame.origin.x = ceil(remainingWidth*position);
     arrow.frame = arrowFrame;
-        
+	
     if(infiniteScrollingActionHandler) {
         self.activityIndicatorView.center = CGPointMake(round(self.bounds.size.width/2), round(self.bounds.size.height/2));
     } else
@@ -105,32 +116,16 @@ typedef NSUInteger SVPullToRefreshState;
 
 #pragma mark - Getters
 
-- (UIImageView *)arrow {
+- (SVPullToRefreshArrow *)arrow {
     if(!arrow && pullToRefreshActionHandler) {
-        arrow = [[UIImageView alloc] initWithImage:self.arrowImage];
+		arrow = [SVPullToRefreshArrow new];
         arrow.frame = CGRectMake(0, 6, 22, 48);
         arrow.backgroundColor = [UIColor clearColor];
+		
+		// assign a different default color for arrow
+//		arrow.arrowColor = [UIColor blueColor];
     }
     return arrow;
-}
-
-- (UIImage *)arrowImage {
-    CGRect rect = CGRectMake(0, 0, 22, 48);
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [[UIColor clearColor] set];
-    CGContextFillRect(context, rect);
-    
-    [self.arrowColor set];
-    CGContextTranslateCTM(context, 0, rect.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    CGContextClipToMask(context, rect, [[UIImage imageNamed:@"arrow.png"] CGImage]);
-    CGContextFillRect(context, rect);
-    
-    UIImage *output = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return output;
 }
 
 - (UIActivityIndicatorView *)activityIndicatorView {
@@ -188,24 +183,26 @@ typedef NSUInteger SVPullToRefreshState;
     [self addSubview:self.arrow];
     	
     self.state = SVPullToRefreshStateHidden;    
-    self.frame = CGRectMake(0, -60, self.scrollView.bounds.size.width, 60);
+    self.frame = CGRectMake(0, -SVPullToRefreshViewHeight, self.scrollView.bounds.size.width, SVPullToRefreshViewHeight);
 }
 
 - (void)setInfiniteScrollingActionHandler:(void (^)(void))actionHandler {
+    self.originalTableFooterView = [(UITableView*)self.scrollView tableFooterView];
     infiniteScrollingActionHandler = [actionHandler copy];
     self.showsInfiniteScrolling = YES;
-    
-    self.frame = CGRectMake(0, 0, self.scrollView.bounds.size.width, 60);
-    self.originalTableFooterView = [(UITableView*)self.scrollView tableFooterView];
+    self.frame = CGRectMake(0, 0, self.scrollView.bounds.size.width, SVPullToRefreshViewHeight);
     [(UITableView*)self.scrollView setTableFooterView:self];
-    
     self.state = SVPullToRefreshStateHidden;    
     [self layoutSubviews];
 }
 
 - (void)setArrowColor:(UIColor *)newArrowColor {
-    arrowColor = newArrowColor;
-    self.arrow.image = self.arrowImage;
+	self.arrow.arrowColor = newArrowColor; // pass through
+	[self.arrow setNeedsDisplay];
+}
+
+- (UIColor *)arrowColor {
+	return self.arrow.arrowColor; // pass through
 }
 
 - (void)setTextColor:(UIColor *)newTextColor {
@@ -219,17 +216,9 @@ typedef NSUInteger SVPullToRefreshState;
 }
 
 - (void)setScrollViewContentInset:(UIEdgeInsets)contentInset {
-    [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState animations:^{
-    //     NSLog(@"Before frame: %@", NSStringFromCGRect(self.scrollView.bounds));
-    //     NSLog(@"Before offset: %@", NSStringFromCGPoint(self.scrollView.contentOffset));
-    //     NSLog(@"Before inset: %@", NSStringFromUIEdgeInsets(self.scrollView.contentInset));
-    //     NSLog(@"After inset: %@", NSStringFromUIEdgeInsets(contentInset));
-        // self.scrollView.contentOffset = CGPointMake(0.0f,0.0f);
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.scrollView.contentInset = contentInset;
-        // self.scrollView.contentOffset = CGPointMake(-0.0f, -0.0f);
     } completion:^(BOOL finished) {
-        // NSLog(@"After offset: %@", NSStringFromCGPoint(self.scrollView.contentOffset));
-        // NSLog(@"After frame: %@", NSStringFromCGRect(self.scrollView.bounds));
         if(self.state == SVPullToRefreshStateHidden && contentInset.top == self.originalScrollViewContentInset.top)
             [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 arrow.alpha = 0;
@@ -256,6 +245,24 @@ typedef NSUInteger SVPullToRefreshState;
 
 #pragma mark -
 
+- (void)startObservingScrollView {
+    if (self.isObservingScrollView)
+        return;
+    
+    [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    [self.scrollView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+    self.isObservingScrollView = YES;
+}
+
+- (void)stopObservingScrollView {
+    if(!self.isObservingScrollView)
+        return;
+    
+    [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
+    [self.scrollView removeObserver:self forKeyPath:@"frame"];
+    self.isObservingScrollView = NO;
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"contentOffset"])
         [self scrollViewDidScroll:[[change valueForKey:NSKeyValueChangeNewKey] CGPointValue]];
@@ -264,17 +271,23 @@ typedef NSUInteger SVPullToRefreshState;
 }
 
 - (void)scrollViewDidScroll:(CGPoint)contentOffset {    
-    if(pullToRefreshActionHandler && self.state != SVPullToRefreshStateLoading) {
-        CGFloat scrollOffsetThreshold = self.frame.origin.y-self.originalScrollViewContentInset.top;
-        
-        if(!self.scrollView.isDragging && self.state == SVPullToRefreshStateTriggered)
-            self.state = SVPullToRefreshStateLoading;
-        else if(contentOffset.y > scrollOffsetThreshold && contentOffset.y < -self.originalScrollViewContentInset.top && self.scrollView.isDragging && self.state != SVPullToRefreshStateLoading)
-            self.state = SVPullToRefreshStateVisible;
-        else if(contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging && self.state == SVPullToRefreshStateVisible)
-            self.state = SVPullToRefreshStateTriggered;
-        else if(contentOffset.y >= -self.originalScrollViewContentInset.top && self.state != SVPullToRefreshStateHidden)
-            self.state = SVPullToRefreshStateHidden;
+    if(pullToRefreshActionHandler) {
+        if (self.state == SVPullToRefreshStateLoading) {
+            CGFloat offset = MAX(self.scrollView.contentOffset.y * -1, 0);
+            offset = MIN(offset, self.originalScrollViewContentInset.top + SVPullToRefreshViewHeight);
+            self.scrollView.contentInset = UIEdgeInsetsMake(offset, 0.0f, 0.0f, 0.0f);
+        } else {
+            CGFloat scrollOffsetThreshold = self.frame.origin.y-self.originalScrollViewContentInset.top;
+            
+            if(!self.scrollView.isDragging && self.state == SVPullToRefreshStateTriggered)
+                self.state = SVPullToRefreshStateLoading;
+            else if(contentOffset.y > scrollOffsetThreshold && contentOffset.y < -self.originalScrollViewContentInset.top && self.scrollView.isDragging && self.state != SVPullToRefreshStateLoading)
+                self.state = SVPullToRefreshStateVisible;
+            else if(contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging && self.state == SVPullToRefreshStateVisible)
+                self.state = SVPullToRefreshStateTriggered;
+            else if(contentOffset.y >= -self.originalScrollViewContentInset.top && self.state != SVPullToRefreshStateHidden)
+                self.state = SVPullToRefreshStateHidden;
+        }
     }
     else if(infiniteScrollingActionHandler) {
         CGFloat scrollOffsetThreshold = self.scrollView.contentSize.height-self.scrollView.bounds.size.height-self.originalScrollViewContentInset.top;
@@ -288,6 +301,7 @@ typedef NSUInteger SVPullToRefreshState;
 
 - (void)triggerRefresh {
     self.state = SVPullToRefreshStateLoading;
+    [self.scrollView setContentOffset:CGPointMake(0, -SVPullToRefreshViewHeight) animated:YES];
 }
 
 - (void)stopAnimating {
@@ -438,4 +452,56 @@ static char UIScrollViewInfiniteScrollingView;
     return self.infiniteScrollingView.showsInfiniteScrolling;
 }
 
+@end
+
+
+#pragma mark - SVPullToRefreshArrow
+
+@implementation SVPullToRefreshArrow
+@synthesize arrowColor;
+
+- (UIColor *)arrowColor {
+	if (arrowColor) return arrowColor;
+	return [UIColor grayColor]; // default Color
+}
+
+- (void)drawRect:(CGRect)rect {
+	CGContextRef c = UIGraphicsGetCurrentContext();
+	
+	// the rects above the arrow
+	CGContextAddRect(c, CGRectMake(5, 0, 12, 4)); // to-do: use dynamic points
+	CGContextAddRect(c, CGRectMake(5, 6, 12, 4)); // currently fixed size: 22 x 48pt
+	CGContextAddRect(c, CGRectMake(5, 12, 12, 4));
+	CGContextAddRect(c, CGRectMake(5, 18, 12, 4));
+	CGContextAddRect(c, CGRectMake(5, 24, 12, 4));
+	CGContextAddRect(c, CGRectMake(5, 30, 12, 4));
+	
+	// the arrow
+	CGContextMoveToPoint(c, 0, 34);
+	CGContextAddLineToPoint(c, 11, 48);
+	CGContextAddLineToPoint(c, 22, 34);
+	CGContextAddLineToPoint(c, 0, 34);
+	CGContextClosePath(c);
+	
+	CGContextSaveGState(c);
+	CGContextClip(c);
+	
+	
+	// Gradient Declaration
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	NSArray* alphaGradientColors = [NSArray arrayWithObjects:
+									(id)[self.arrowColor colorWithAlphaComponent:0].CGColor,
+									(id)[self.arrowColor colorWithAlphaComponent:1].CGColor,
+									nil];
+	CGFloat alphaGradientLocations[] = {0, 0.8};
+	CGGradientRef alphaGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)alphaGradientColors, alphaGradientLocations);
+	
+	
+	CGContextDrawLinearGradient(c, alphaGradient, CGPointZero, CGPointMake(0, rect.size.height), 0);
+	
+	CGContextRestoreGState(c);
+	
+	CGGradientRelease(alphaGradient);
+	CGColorSpaceRelease(colorSpace);
+}
 @end

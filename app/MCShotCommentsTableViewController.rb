@@ -15,7 +15,6 @@ class MCShotCommentsTableViewController < UITableViewController
     # always set tableHeaderView after having set it size, otherwise a height = 0 will be implied
     self.tableView.tableHeaderView = UIView.alloc.initWithFrame([[0,0],[320,44]])
     self.tableView.tableHeaderView.backgroundColor = "#F3F3F3".uicolor
-
     commentsButton = UIImageView.alloc.initWithImage(UIImage.imageNamed("info_button.png"))
     commentsButton.frame = [[320 - 26 -10,10],[26,26]]
 
