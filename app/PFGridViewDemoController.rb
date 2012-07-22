@@ -7,10 +7,6 @@ class PFGridViewDemoViewController < UIViewController
     @barButtonItem = navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithImage(UIImage.imageNamed("Toolbar-Icon.png"), style:UIBarButtonItemStylePlain, target:self, action:"showPopover")
     @barButtonItem.tintColor = "#ea4c89".uicolor
 
-    @activityIndicator = UIActivityIndicatorView.alloc.initWithActivityIndicatorStyle(UIActivityIndicatorViewStyleWhite)
-    @activityIndicator.startAnimating
-
-
     self.view.backgroundColor = UIColor.blackColor
     @demoGridView = PFGridView.alloc.initWithFrame([[0,0],[320,416]])
     @demoGridView.dataSource = self
@@ -18,7 +14,6 @@ class PFGridViewDemoViewController < UIViewController
     @demoGridView.cellHeight = 79.5
     @demoGridView.headerHeight = 0
     self.view.addSubview @demoGridView
-    self.view.addSubview @activityIndicator
 
     # Some trickery to make the grid load empty, and add PullToRefresh to the grid UIViewController
     @shots = [[]]

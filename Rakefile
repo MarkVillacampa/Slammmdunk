@@ -38,18 +38,18 @@ Motion::Project::App.setup do |app|
 
   app.vendor_project( "vendor/json-framework", :xcode, :xcodeproj => "SBJson.xcodeproj", :target => "sbjson-ios", :products => ["libsbjson-ios.a"], :headers_dir => "Classes")
 
-  app.vendor_project("vendor/libThree20", :static, :products => ['libThree20.a'], :headers_dir => "headers")
+  # app.vendor_project("vendor/libThree20", :static, :products => ['libThree20.a'], :headers_dir => "headers")
 
-  app.vendor_project("vendor/libThree20Core", :static, :products => ['libThree20Core.a'], :headers_dir => "headers")
+  # app.vendor_project("vendor/libThree20Core", :static, :products => ['libThree20Core.a'], :headers_dir => "headers")
 
-  app.vendor_project("vendor/libThree20Network", :static, :products => ['libThree20Network.a'], :headers_dir => "headers")
+  # app.vendor_project("vendor/libThree20Network", :static, :products => ['libThree20Network.a'], :headers_dir => "headers")
 
-  app.vendor_project("vendor/libThree20Style", :static, :products => ['libThree20Style.a'], :headers_dir => "headers")
+  # app.vendor_project("vendor/libThree20Style", :static, :products => ['libThree20Style.a'], :headers_dir => "headers")
 
-  app.vendor_project("vendor/libThree20UICommon", :static, :products => ['libThree20UICommon.a'], :headers_dir => "headers")
+  # app.vendor_project("vendor/libThree20UICommon", :static, :products => ['libThree20UICommon.a'], :headers_dir => "headers")
 
-  app.vendor_project("vendor/libThree20UI", :static, :products => ['libThree20UI.a'], :headers_dir => "headers")
+  # app.vendor_project("vendor/libThree20UI", :static, :products => ['libThree20UI.a'], :headers_dir => "headers")
 
-  app.vendor_project("vendor/libThree20UINavigator", :static, :products => ['libThree20UINavigator.a'], :headers_dir => "headers")
+  # app.vendor_project("vendor/libThree20UINavigator", :static, :products => ['libThree20UINavigator.a'], :headers_dir => "headers")
 
 end

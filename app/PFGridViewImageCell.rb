@@ -24,10 +24,14 @@ class PFGridViewImageCell < PFGridViewCell
 
   def fillWithShot(shot, inGridView:gridView)
     unless shot.image_small
+
       @activityIndicator = UIActivityIndicatorView.alloc.initWithActivityIndicatorStyle(UIActivityIndicatorViewStyleWhite)
+      @activityIndicator.center = [@imageView.frame.size.width/2, @imageView.frame.size.height/2]
       @activityIndicator.startAnimating
       self.addSubview(@activityIndicator)
+
       @imageView.image = nil
+      
       Dispatch::Queue.concurrent.async do
         image_data = NSData.alloc.initWithContentsOfURL(NSURL.URLWithString(shot.data['image_teaser_url']))
         if image_data
